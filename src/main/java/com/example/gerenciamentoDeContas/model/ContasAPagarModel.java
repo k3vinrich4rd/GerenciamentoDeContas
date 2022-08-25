@@ -29,15 +29,17 @@ public class ContasAPagarModel {
     @Column(length = 50, nullable = false)
     private Double valor;
 
+    @Enumerated(EnumType.STRING)
+    private Tipo tipo;
+
     @Column(name = "data_de_vencimento", length = 50, nullable = false)
     private LocalDate dataDeVencimento;
 
-    @Column(name = "data_de_pagamento", length = 100, nullable = false)
+    @Column(name = "data_de_pagamento")
     private LocalDateTime dataDePagamento;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Enumerated(EnumType.STRING)
-    private Tipo tipo;
+
 }

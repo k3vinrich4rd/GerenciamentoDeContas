@@ -22,9 +22,9 @@ public class ExceptionHandlerContasAPagar extends ResponseEntityExceptionHandler
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String mensgemUser = messageSource.getMessage("mensagem.ivalida", null, null);
+        String mensagemUser = messageSource.getMessage("mensagem.invalida", null, null);
         String mensagemDeveloper = ex.getCause().toString();
-        return handleExceptionInternal(ex, new MensagemErro(mensgemUser, mensagemDeveloper), headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, new MensagemErro(mensagemUser, mensagemDeveloper), headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Getter

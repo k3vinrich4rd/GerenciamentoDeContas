@@ -29,9 +29,16 @@ public class ContasAPagarController {
         return ResponseEntity.ok(contasAPagarService.exibirTodosRegistrosDePagamento());
     }
 
-    @GetMapping(path = "/id")
-    ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long id){
+    @GetMapping(path = "/{id}")
+    ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long id) {
         return ResponseEntity.ok(contasAPagarService.exibirContasViaId(id));
     }
+
+
+    @DeleteMapping(path = "/{id}")
+    public void deletarRegistroDeContas(@PathVariable Long id) {
+        contasAPagarService.deletarRegistros(id);
+    }
+
 
 }
