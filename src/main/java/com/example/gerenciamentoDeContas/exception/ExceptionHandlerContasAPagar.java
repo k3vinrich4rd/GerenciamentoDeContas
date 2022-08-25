@@ -1,3 +1,6 @@
+/*
+
+
 package com.example.gerenciamentoDeContas.exception;
 
 import lombok.AllArgsConstructor;
@@ -37,3 +40,4 @@ public class ExceptionHandlerContasAPagar extends ResponseEntityExceptionHandler
         private String mensagemDoDesenvolvedor;
     }
 }
+*/
