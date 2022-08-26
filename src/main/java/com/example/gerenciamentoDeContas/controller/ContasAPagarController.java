@@ -43,9 +43,5 @@ public class ContasAPagarController {
         return ResponseEntity.ok(contasAPagarService.alterarRegistrosDePagamento(alterarStatusPagamentoRequest, id));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deletarContasCadastradas(@PathVariable Long id) {
-        contasAPagarService.deletarContasRegistradas(id);
-    }
 
 }
