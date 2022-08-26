@@ -1,5 +1,3 @@
-/*
-
 
 package com.example.gerenciamentoDeContas.exception;
 
@@ -40,4 +38,3 @@ public class ExceptionHandlerContasAPagar extends ResponseEntityExceptionHandler
         private String mensagemDoDesenvolvedor;
     }
 }
-*/

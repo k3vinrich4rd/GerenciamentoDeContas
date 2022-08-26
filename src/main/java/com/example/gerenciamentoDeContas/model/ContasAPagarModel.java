@@ -32,11 +32,12 @@ public class ContasAPagarModel {
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
 
+
     @Column(name = "data_de_vencimento", length = 50, nullable = false)
-    private LocalDate dataDeVencimento;
+    public LocalDate dataDeVencimento;
 
     @Column(name = "data_de_pagamento")
-    private LocalDateTime dataDePagamento;
+    public LocalDateTime dataDePagamento;
 
     @Enumerated(EnumType.STRING)
     private Status status;

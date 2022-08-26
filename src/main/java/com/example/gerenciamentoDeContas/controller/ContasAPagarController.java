@@ -2,7 +2,7 @@ package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
-import com.example.gerenciamentoDeContas.model.response.ContasAPagarResposta;
+import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
 import com.example.gerenciamentoDeContas.service.ContasAPagarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,9 +27,10 @@ public class ContasAPagarController {
     }
 
     @GetMapping
-    ResponseEntity<List<ContasAPagarResposta>> exibirTodosOsRegistrosDePagamento() {
+    ResponseEntity<List<ContasAPagarResponse>> exibirTodosOsRegistrosDePagamento() {
         return ResponseEntity.ok(contasAPagarService.exibirTodosRegistrosDePagamento());
     }
+
 
     @GetMapping(path = "/{id}")
     ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long id) {
@@ -39,14 +40,12 @@ public class ContasAPagarController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<ContasAPagarModel> alterarStatusDasContas(@RequestBody AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, @PathVariable Long id) {
-
         return ResponseEntity.ok(contasAPagarService.alterarRegistrosDePagamento(alterarStatusPagamentoRequest, id));
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deletarRegistroDeContas(@PathVariable Long id) {
-        contasAPagarService.deletarRegistros(id);
+    public void deletarContasCadastradas(@PathVariable Long id) {
+        contasAPagarService.deletarContasRegistradas(id);
     }
-
 
 }

@@ -1,10 +1,9 @@
 package com.example.gerenciamentoDeContas.service;
 // Caso estiver assim, não precisará repetir a escrita do Enum
 
-import com.example.gerenciamentoDeContas.enumeric.Status;
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
-import com.example.gerenciamentoDeContas.model.response.ContasAPagarResposta;
+import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
 import com.example.gerenciamentoDeContas.repository.ContasAPagarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.gerenciamentoDeContas.enumeric.Status.*;
+import static com.example.gerenciamentoDeContas.enumeric.Status.AGUARDANDO;
+import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
 
 @Service
 public class ContasAPagarService {
-
 
     @Autowired
     private ContasAPagarRepository contasAPagarRepository;
@@ -34,11 +33,13 @@ public class ContasAPagarService {
         return contasAPagarRepository.save(contasAPagarModel);
     }
 
-    public List<ContasAPagarResposta> exibirTodosRegistrosDePagamento() {
-        ContasAPagarResposta contasAPagar = new ContasAPagarResposta();
-        List<ContasAPagarResposta> contasAPagarResposta = new ArrayList<>();
+
+    public List<ContasAPagarResponse> exibirTodosRegistrosDePagamento() {
+
+        List<ContasAPagarResponse> contasAPagarResposta = new ArrayList<>();
         List<ContasAPagarModel> contasAPagarModelList = contasAPagarRepository.findAll();
         for (ContasAPagarModel valoresDeResposta : contasAPagarModelList) {
+            ContasAPagarResponse contasAPagar = new ContasAPagarResponse();
             contasAPagar.setId(valoresDeResposta.getId());
             contasAPagar.setNome(valoresDeResposta.getNome());
             contasAPagar.setValor(valoresDeResposta.getValor());
@@ -47,6 +48,7 @@ public class ContasAPagarService {
         }
         return contasAPagarResposta;
     }
+
 
     public Optional<ContasAPagarModel> exibirContasViaId(Long id) {
         return contasAPagarRepository.findById(id);
@@ -59,16 +61,17 @@ public class ContasAPagarService {
 
         return contasAPagarRepository.save(contasAPagar);
 
-
     }
 
-    public void deletarRegistros(Long id) {
+    public void deletarContasRegistradas(Long id) {
         contasAPagarRepository.deleteById(id);
     }
 }
 
 
-// contasAPagarModel.setDataDePagamento(LocalDateTime.now());
+
+
+
 
 
 
