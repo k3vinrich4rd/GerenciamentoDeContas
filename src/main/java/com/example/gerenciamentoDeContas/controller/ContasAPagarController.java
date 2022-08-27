@@ -1,5 +1,7 @@
 package com.example.gerenciamentoDeContas.controller;
 
+import com.example.gerenciamentoDeContas.enumeric.Status;
+import com.example.gerenciamentoDeContas.enumeric.Tipo;
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
 import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
@@ -27,22 +29,33 @@ public class ContasAPagarController {
     @PostMapping
     public ResponseEntity<ContasAPagarModel> cadastrarNovaConta(@RequestBody ContasAPagarModel contasAPagarModel) {
         ContasAPagarModel contas = contasAPagarService.cadastrarContas(contasAPagarModel);
-        return new ResponseEntity<>(contas, HttpStatus.CREATED);
+        return new ResponseEntity<>(contas, HttpStatus.CREATED); // Retorna 200
     }
 
     @GetMapping
-    ResponseEntity<List<ContasAPagarResponse>> exibirTodosOsRegistrosDePagamento() {
+    public ResponseEntity<List<ContasAPagarResponse>> exibirTodosOsRegistrosDePagamento() {
         return ResponseEntity.ok(contasAPagarService.exibirTodosRegistrosDePagamento());
     }
 
 
     @GetMapping(path = "/{id}")
-    ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long id) {
+    public ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long id) {
         if (!contasAPagarRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(contasAPagarService.exibirContasViaId(id));
     }
+
+    @GetMapping(path = "/status/{status}")
+    public ResponseEntity<List<ContasAPagarModel>> exibirStatusDoPagamento(@PathVariable Status status) {
+        return ResponseEntity.ok(contasAPagarRepository.findByStatus(status));
+    }
+
+    @GetMapping(path = "/tipo/{tipo}")
+    public ResponseEntity<List<ContasAPagarModel>> exibirTipoDoPagamento(@PathVariable Tipo tipo) {
+        return ResponseEntity.ok(contasAPagarRepository.findByTipo(tipo));
+    }
+
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<ContasAPagarModel> alterarStatusDasContas(@RequestBody AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, @PathVariable Long id) {
@@ -52,7 +65,9 @@ public class ContasAPagarController {
         return ResponseEntity.ok(contasAPagarService.alterarRegistrosDePagamento(alterarStatusPagamentoRequest, id));
     }
 
+
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
     public ResponseEntity deletar(@PathVariable Long id) {
         if (!contasAPagarRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
