@@ -60,7 +60,7 @@ public class ContasAPagarController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<ContasAPagarModel> alterarStatusDasContas(@RequestBody AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, @PathVariable Long id) {
         if (!contasAPagarRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.unprocessableEntity().build(); // Retorna 422
         }
         return ResponseEntity.ok(contasAPagarService.alterarRegistrosDePagamento(alterarStatusPagamentoRequest, id));
     }
