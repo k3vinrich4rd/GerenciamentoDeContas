@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/// Perguntar para a Grazi
 
 @Getter
 @Setter
