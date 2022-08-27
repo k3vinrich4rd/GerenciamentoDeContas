@@ -33,7 +33,6 @@ public class ContasAPagarModel {
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
 
-
     @Column(name = "data_de_vencimento", length = 50, nullable = false)
     public LocalDate dataDeVencimento;
 
