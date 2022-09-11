@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+@ControllerAdvice //Classe criada para tratamento de exceções (bad request)
 public class ExceptionHandlerContasAPagar extends ResponseEntityExceptionHandler {
 
 

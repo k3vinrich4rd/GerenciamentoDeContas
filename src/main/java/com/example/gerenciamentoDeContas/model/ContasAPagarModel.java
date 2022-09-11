@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+//Getters, Setters, Construtor, Construtor vazio, Entidade e Tabela que será criada dentro do banco de dados
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,28 +19,35 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "gerenciamento_de_contas")
 public class ContasAPagarModel {
+    //Model do projeto
 
-    @Id
+    @Id // Chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //Atributo
 
     @Column(length = 50, nullable = false)
-    private String nome;
+    private String nome; //Atributo
 
+    //O precision cuida da quantidade de digitos
+    //O scale cuida da quantidade de casas decimais depois da vírgula
     @Column(length = 50, nullable = false)
-    private Double valor;
+    private Double valor; //Atributo
 
+    //Atributo do tipo Enumerated
     @Enumerated(EnumType.STRING)
-    private Tipo tipo;
+    private Tipo tipo; //Atributo
 
+    //Coluna
     @Column(name = "data_de_vencimento", length = 50, nullable = false)
-    public LocalDate dataDeVencimento;
+    public LocalDate dataDeVencimento; //Atributo
 
+    //Coluna
     @Column(name = "data_de_pagamento")
-    public LocalDateTime dataDePagamento;
+    public LocalDateTime dataDePagamento; //Atributo
 
+    //Atributo do tipo Enumerated
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status; //Atributo
 
 
 }

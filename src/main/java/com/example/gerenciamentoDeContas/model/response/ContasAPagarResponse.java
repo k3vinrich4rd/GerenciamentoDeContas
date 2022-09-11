@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+//Response criada para exibir somente alguns atributos em específico
 @Getter
 @Setter
 @AllArgsConstructor

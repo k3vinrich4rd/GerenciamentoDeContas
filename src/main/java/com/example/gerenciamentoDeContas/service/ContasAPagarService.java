@@ -17,7 +17,7 @@ import java.util.Optional;
 import static com.example.gerenciamentoDeContas.enumeric.Status.AGUARDANDO;
 import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
 
-@Service
+@Service //Lógica do código
 public class ContasAPagarService {
 
     @Autowired

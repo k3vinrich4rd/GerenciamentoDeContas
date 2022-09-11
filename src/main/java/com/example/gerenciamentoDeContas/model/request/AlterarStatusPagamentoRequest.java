@@ -6,6 +6,7 @@ import lombok.Getter;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+//Request necessária e criada para fazer alteração de pagamento
 @Getter
 public class AlterarStatusPagamentoRequest {
 
