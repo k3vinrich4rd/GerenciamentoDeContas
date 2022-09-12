@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Validated
@@ -28,5 +29,20 @@ public class EnderecoController {
     @GetMapping
     public ResponseEntity<List<EnderecoModel>> exibirEnderecosCadastrados(){
         return ResponseEntity.ok(enderecoService.exibirEnderecos());
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Optional<EnderecoModel>> exibirViaId(@PathVariable Long id){
+        return ResponseEntity.ok(enderecoService.exibirEnderecoViaId(id));
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<EnderecoModel> alterarEndereco(@Valid @RequestBody EnderecoModel enderecoModel){
+        return ResponseEntity.ok(enderecoService.alterarEnderecoCadastrado(enderecoModel));
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleterEnderecoCadastrado(@PathVariable Long id){
+        enderecoService.deletarEndereco(id);
     }
 }

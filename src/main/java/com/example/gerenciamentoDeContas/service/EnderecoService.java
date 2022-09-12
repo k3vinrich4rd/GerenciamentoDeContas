@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EnderecoService {
@@ -19,5 +20,17 @@ public class EnderecoService {
     }
     public List<EnderecoModel> exibirEnderecos(){
         return iEnderecoRepository.findAll();
+    }
+
+    public Optional<EnderecoModel> exibirEnderecoViaId(Long id) {
+        return iEnderecoRepository.findById(id);
+    }
+
+    public EnderecoModel alterarEnderecoCadastrado(EnderecoModel enderecoModel) {
+        return iEnderecoRepository.save(enderecoModel);
+    }
+
+    public void deletarEndereco(Long id) {
+        iEnderecoRepository.deleteById(id);
     }
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Validated
 @Entity
 @Table(name = "enderecos")
-public class EnderecoModel {
+public class EnderecoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
