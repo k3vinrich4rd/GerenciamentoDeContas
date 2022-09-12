@@ -4,7 +4,7 @@ package com.example.gerenciamentoDeContas.service;
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
 import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
-import com.example.gerenciamentoDeContas.repository.ContasAPagarRepository;
+import com.example.gerenciamentoDeContas.repository.IContasAPagarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
 public class ContasAPagarService {
 
     @Autowired
-    private ContasAPagarRepository contasAPagarRepository;
+    private IContasAPagarRepository contasAPagarRepository;
 
     public ContasAPagarModel cadastrarContas(ContasAPagarModel contasAPagarModel) {
         Boolean pagamentoEmDia = LocalDate.now().isBefore(contasAPagarModel.getDataDeVencimento()) || LocalDate.now().equals(contasAPagarModel.getDataDeVencimento());

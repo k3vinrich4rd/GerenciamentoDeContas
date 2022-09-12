@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ContasAPagarRepository extends JpaRepository<ContasAPagarModel, Long> {
+public interface IContasAPagarRepository extends JpaRepository<ContasAPagarModel, Long> {
 
     public List<ContasAPagarModel> findByStatus(Status status); // Query methods (Métodos de consulta)
 
