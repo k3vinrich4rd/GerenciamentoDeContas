@@ -23,15 +23,15 @@ public class CidadeService {
         return iCidadeRepository.findAll();
     }
 
-    public Optional<CidadeModel> exibirCidadesViaId(Long id) {
-        return iCidadeRepository.findById(id);
+    public Optional<CidadeModel> exibirCidadesViaId(Long codigo) {
+        return iCidadeRepository.findById(codigo);
     }
 
     public CidadeModel alterarCidadesCadastradas(CidadeModel cidadeModel) {
         return iCidadeRepository.save(cidadeModel);
     }
 
-    public void deletarCidadesCadastradas(Long id) {
-        iCidadeRepository.deleteById(id);
+    public void deletarCidadesCadastradas(Long codigo) {
+        iCidadeRepository.deleteById(codigo);
     }
 }

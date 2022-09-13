@@ -40,7 +40,7 @@ public class ContasAPagarService {
         List<ContasAPagarModel> contasAPagarModelList = contasAPagarRepository.findAll();
         for (ContasAPagarModel valoresDeResposta : contasAPagarModelList) {
             ContasAPagarResponse contasAPagar = new ContasAPagarResponse();
-            contasAPagar.setId(valoresDeResposta.getId());
+            contasAPagar.setCodigo(valoresDeResposta.getCodigo());
             contasAPagar.setNome(valoresDeResposta.getNome());
             contasAPagar.setValor(valoresDeResposta.getValor());
             contasAPagar.setStatus(valoresDeResposta.getStatus());
@@ -50,12 +50,12 @@ public class ContasAPagarService {
     }
 
 
-    public Optional<ContasAPagarModel> exibirContasViaId(Long id) {
-        return contasAPagarRepository.findById(id);
+    public Optional<ContasAPagarModel> exibirContasViaId(Long codigo) {
+        return contasAPagarRepository.findById(codigo);
     }
 
-    public ContasAPagarModel alterarRegistrosDePagamento(AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, Long id) {
-        ContasAPagarModel contasAPagar = contasAPagarRepository.findById(id).get(); // Transforma em um objeto comum
+    public ContasAPagarModel alterarRegistrosDePagamento(AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, Long codigo) {
+        ContasAPagarModel contasAPagar = contasAPagarRepository.findById(codigo).get(); // Transforma em um objeto comum
         contasAPagar.setStatus(alterarStatusPagamentoRequest.getStatus());
         contasAPagar.setDataDePagamento(LocalDateTime.now());
 
@@ -63,8 +63,8 @@ public class ContasAPagarService {
 
     }
 
-    public void deletarConta(Long id) {
-        contasAPagarRepository.deleteById(id);
+    public void deletarConta(Long codigo) {
+        contasAPagarRepository.deleteById(codigo);
     }
 }
 

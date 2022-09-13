@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class EnderecoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
     @Column(name = "logradouro_endereco",length = 100,nullable = false)
     private String logradouro;
@@ -35,6 +36,10 @@ public class EnderecoModel implements Serializable {
     private String pontoReferencia;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "codigo")
     private UsuarioModel usuarioModel;
+
+    @ManyToOne
+    @JoinColumn(name = "cidade_id", referencedColumnName = "codigo")
+    private CidadeModel cidadeModel;
 }

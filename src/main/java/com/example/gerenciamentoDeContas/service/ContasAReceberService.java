@@ -34,5 +34,9 @@ public class ContasAReceberService {
     public void deletarContasCadastradas(Long id) {
         iContasAReceberRepository.deleteById(id);
     }
+
+    public void deletarContasCgadastradas(Long id) {
+        iContasAReceberRepository.deleteById(id);
+    }
 }
 

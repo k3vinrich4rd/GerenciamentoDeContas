@@ -24,7 +24,7 @@ public class ContasAPagarModel implements Serializable {
 
     @Id // Chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //Atributo
+    private Long codigo; //Atributo
 
     @Column(length = 50, nullable = false)
     private String nome; //Atributo

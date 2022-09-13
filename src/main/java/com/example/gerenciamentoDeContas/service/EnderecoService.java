@@ -22,15 +22,15 @@ public class EnderecoService {
         return iEnderecoRepository.findAll();
     }
 
-    public Optional<EnderecoModel> exibirEnderecoViaId(Long id) {
-        return iEnderecoRepository.findById(id);
+    public Optional<EnderecoModel> exibirEnderecoViaId(Long codigo) {
+        return iEnderecoRepository.findById(codigo);
     }
 
     public EnderecoModel alterarEnderecoCadastrado(EnderecoModel enderecoModel) {
         return iEnderecoRepository.save(enderecoModel);
     }
 
-    public void deletarEndereco(Long id) {
-        iEnderecoRepository.deleteById(id);
+    public void deletarEndereco(Long codigo) {
+        iEnderecoRepository.deleteById(codigo);
     }
 }

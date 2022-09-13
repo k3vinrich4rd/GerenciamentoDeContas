@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContasAPagarResponse {
-    private Long id;
+    private Long codigo;
     private String nome;
     private Double valor;
     private Status status;

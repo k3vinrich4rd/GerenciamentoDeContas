@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,19 +28,19 @@ public class ContasAReceberController {
         return ResponseEntity.ok(contasAReceberService.exibirContas());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<ContasReceberModel>> exibirContasViaId(@PathVariable Long id) {
-        return ResponseEntity.ok(contasAReceberService.exibirViaId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<ContasReceberModel>> exibirContasViaId(@PathVariable Long codigo) {
+        return ResponseEntity.ok(contasAReceberService.exibirViaId(codigo));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{codigo}")
     public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@RequestBody ContasReceberModel contasReceberModel) {
         return ResponseEntity.ok(contasAReceberService.atualizarContas(contasReceberModel));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deletarContasCadastradas(@PathVariable Long id) {
-        contasAReceberService.deletarContasCgadastradas(id);
+    @DeleteMapping(path = "/{codigo}")
+    public void deletarContasCadastradas(@PathVariable Long codigo) {
+        contasAReceberService.deletarContasCgadastradas(codigo);
     }
 
 }

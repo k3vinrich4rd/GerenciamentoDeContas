@@ -31,18 +31,18 @@ public class EstadoController {
         return ResponseEntity.ok(estadoService.exibirEstados());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<EstadoModel>> exibirEstadosViaId(@PathVariable Long id){
-        return ResponseEntity.ok(estadoService.exibirEstadosViaId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<EstadoModel>> exibirEstadosViaId(@PathVariable Long codigo){
+        return ResponseEntity.ok(estadoService.exibirEstadosViaId(codigo));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{codigo}")
     public ResponseEntity<EstadoModel> alterarEstadosCadastrados(@Valid @RequestBody EstadoModel estadoModel){
         return ResponseEntity.ok(estadoService.alterarEstadosCadastrados(estadoModel));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deletarEstadosCadastrados(@PathVariable Long id){
-        estadoService.deletarEstados(id);
+    @DeleteMapping(path = "/{codigo}")
+    public void deletarEstadosCadastrados(@PathVariable Long codigo){
+        estadoService.deletarEstados(codigo);
     }
 }

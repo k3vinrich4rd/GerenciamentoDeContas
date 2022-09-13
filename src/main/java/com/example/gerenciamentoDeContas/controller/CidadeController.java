@@ -31,18 +31,18 @@ public class CidadeController {
         return ResponseEntity.ok(cidadeService.exibirCidades());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<CidadeModel>> exibirCidadesViaId(@PathVariable Long id){
-        return ResponseEntity.ok(cidadeService.exibirCidadesViaId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<CidadeModel>> exibirCidadesViaId(@PathVariable Long codigo){
+        return ResponseEntity.ok(cidadeService.exibirCidadesViaId(codigo));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{codigo}")
     public ResponseEntity<CidadeModel> alterarCidadeCadastrada(@Valid @RequestBody CidadeModel cidadeModel){
         return ResponseEntity.ok(cidadeService.alterarCidadesCadastradas(cidadeModel));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deletarCidadesCadastradas(@PathVariable Long id){
-        cidadeService.deletarCidadesCadastradas(id);
+    @DeleteMapping(path = "/{codigo}")
+    public void deletarCidadesCadastradas(@PathVariable Long codigo){
+        cidadeService.deletarCidadesCadastradas(codigo);
     }
 }

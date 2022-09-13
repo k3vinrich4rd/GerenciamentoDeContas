@@ -27,9 +27,9 @@ public class UsuarioModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
-    @Column(name = "nome_usuario", length = 55, nullable = false)
+     @Column(name = "nome_usuario", length = 55, nullable = false)
     private String nomeUsuario;
 
     @Column(name = "data_de_nascimento", length = 15, nullable = false)
@@ -46,9 +46,8 @@ public class UsuarioModel implements Serializable {
     private String cpf;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuarioModel",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
     private List<EnderecoModel> enderecoModel = new ArrayList<>();
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)

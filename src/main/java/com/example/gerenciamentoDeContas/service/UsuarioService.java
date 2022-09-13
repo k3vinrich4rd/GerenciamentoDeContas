@@ -24,8 +24,8 @@ public class UsuarioService {
     }
 
 
-    public Optional<UsuarioModel> exibirUsuarioViaId(Long id) {
-        return iUsuarioRepository.findById(id);
+    public Optional<UsuarioModel> exibirUsuarioViaId(Long codigo) {
+        return iUsuarioRepository.findById(codigo);
     }
 
 
@@ -33,7 +33,7 @@ public class UsuarioService {
         return iUsuarioRepository.save(usuarioModel);
     }
 
-    public void deletarUsuario(Long id) {
-        iUsuarioRepository.deleteById(id);
+    public void deletarUsuario(Long codigo) {
+        iUsuarioRepository.deleteById(codigo);
     }
 }

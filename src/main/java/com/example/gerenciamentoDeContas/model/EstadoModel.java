@@ -20,7 +20,7 @@ public class EstadoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
     @Column(name = "uf_estado", length = 2, nullable = false)
     private String uf;

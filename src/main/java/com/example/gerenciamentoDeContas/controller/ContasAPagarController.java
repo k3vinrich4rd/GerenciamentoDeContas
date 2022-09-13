@@ -38,12 +38,12 @@ public class ContasAPagarController {
     }
 
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long id) {
-        if (!contasAPagarRepository.existsById(id)) {
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<ContasAPagarModel>> exibirPagamentosViaId(@PathVariable Long codigo) {
+        if (!contasAPagarRepository.existsById(codigo)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(contasAPagarService.exibirContasViaId(id));
+        return ResponseEntity.ok(contasAPagarService.exibirContasViaId(codigo));
     }
 
     @GetMapping(path = "/status/{status}")

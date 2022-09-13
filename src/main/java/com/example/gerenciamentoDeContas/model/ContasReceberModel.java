@@ -22,7 +22,7 @@ public class ContasReceberModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
     @Column(name = "recebimento_contas_receber", length = 50, nullable = false)
     private String recebimento;
@@ -47,7 +47,7 @@ public class ContasReceberModel {
 
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "codigo")
     private UsuarioModel usuarioModel;
 
 

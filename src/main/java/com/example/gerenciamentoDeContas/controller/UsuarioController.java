@@ -31,19 +31,19 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.exibirUsuarioCadastrado());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<UsuarioModel>> exibirUsuarioViaId(@PathVariable Long id){
-        return ResponseEntity.ok(usuarioService.exibirUsuarioViaId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<UsuarioModel>> exibirUsuarioViaId(@PathVariable Long codigo){
+        return ResponseEntity.ok(usuarioService.exibirUsuarioViaId(codigo));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{codigo}")
     public ResponseEntity<UsuarioModel> alterarUsuarioCadastrado(@Valid @RequestBody UsuarioModel usuarioModel){
         return ResponseEntity.ok(usuarioService.alterarUsuarioCadastrado(usuarioModel));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deletarUsuarioCadastrado(@PathVariable Long id){
-        usuarioService.deletarUsuario(id);
+    @DeleteMapping(path = "/{codigo}")
+    public void deletarUsuarioCadastrado(@PathVariable Long codigo){
+        usuarioService.deletarUsuario(codigo);
     }
 
 

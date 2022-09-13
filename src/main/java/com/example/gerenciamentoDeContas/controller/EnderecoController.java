@@ -31,18 +31,18 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoService.exibirEnderecos());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<EnderecoModel>> exibirViaId(@PathVariable Long id){
-        return ResponseEntity.ok(enderecoService.exibirEnderecoViaId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<EnderecoModel>> exibirViaId(@PathVariable Long codigo){
+        return ResponseEntity.ok(enderecoService.exibirEnderecoViaId(codigo));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{codigo}")
     public ResponseEntity<EnderecoModel> alterarEndereco(@Valid @RequestBody EnderecoModel enderecoModel){
         return ResponseEntity.ok(enderecoService.alterarEnderecoCadastrado(enderecoModel));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public void deleterEnderecoCadastrado(@PathVariable Long id){
-        enderecoService.deletarEndereco(id);
+    @DeleteMapping(path = "/{codigo}")
+    public void deleterEnderecoCadastrado(@PathVariable Long codigo){
+        enderecoService.deletarEndereco(codigo);
     }
 }

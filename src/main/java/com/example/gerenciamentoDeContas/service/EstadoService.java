@@ -23,15 +23,15 @@ public class EstadoService {
         return iEstadoRepository.findAll();
     }
 
-    public Optional<EstadoModel> exibirEstadosViaId(Long id) {
-        return iEstadoRepository.findById(id);
+    public Optional<EstadoModel> exibirEstadosViaId(Long codigo) {
+        return iEstadoRepository.findById(codigo);
     }
 
     public EstadoModel alterarEstadosCadastrados(EstadoModel estadoModel) {
         return iEstadoRepository.save(estadoModel);
     }
 
-    public void deletarEstados(Long id) {
-        iEstadoRepository.deleteById(id);
+    public void deletarEstados(Long codigo) {
+        iEstadoRepository.deleteById(codigo);
     }
 }
