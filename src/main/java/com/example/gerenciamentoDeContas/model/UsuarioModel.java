@@ -45,8 +45,12 @@ public class UsuarioModel implements Serializable {
     @NotBlank(message = "Erro, cpf não informado")
     private String cpf;
 
-
     @JsonIgnore
     @OneToMany(mappedBy = "usuarioModel",cascade = CascadeType.ALL)
     private List<EnderecoModel> enderecoModel = new ArrayList<>();
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
+    private List<ContasReceberModel> contasReceberModel = new ArrayList<>();
 }
