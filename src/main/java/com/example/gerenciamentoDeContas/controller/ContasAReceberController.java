@@ -19,7 +19,7 @@ public class ContasAReceberController {
 
     @PostMapping
     public ResponseEntity<ContasReceberModel> cadastrarContaDeRecebimento(@RequestBody ContasReceberModel contasReceberModel) {
-        ContasReceberModel contas = contasAReceberService.cadastrarUmaNovaConta(contasReceberModel);
+        ContasReceberModel contas = contasAReceberService.cadastrarNovoRecebimento(contasReceberModel);
         return new ResponseEntity<>(contas, HttpStatus.CREATED);
     }
 
@@ -40,7 +40,7 @@ public class ContasAReceberController {
 
     @DeleteMapping(path = "/{codigo}")
     public void deletarContasCadastradas(@PathVariable Long codigo) {
-        contasAReceberService.deletarContasCgadastradas(codigo);
+        contasAReceberService.deletarContasCadastradas(codigo);
     }
 
 }

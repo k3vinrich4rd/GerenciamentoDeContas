@@ -15,7 +15,7 @@ public class ContasAReceberService {
     @Autowired
     private IContasAReceberRepository iContasAReceberRepository;
 
-    public ContasReceberModel cadastrarUmaNovaConta(ContasReceberModel contasReceberModel) {
+    public ContasReceberModel cadastrarNovoRecebimento(ContasReceberModel contasReceberModel) {
         return iContasAReceberRepository.save(contasReceberModel);
     }
 
@@ -23,20 +23,17 @@ public class ContasAReceberService {
         return iContasAReceberRepository.findAll();
     }
 
-    public Optional<ContasReceberModel> exibirViaId(Long id) {
-        return iContasAReceberRepository.findById(id);
+    public Optional<ContasReceberModel> exibirViaId(Long codigo) {
+        return iContasAReceberRepository.findById(codigo);
     }
 
     public ContasReceberModel atualizarContas(ContasReceberModel contasReceberModel) {
         return iContasAReceberRepository.save(contasReceberModel);
     }
 
-    public void deletarContasCadastradas(Long id) {
-        iContasAReceberRepository.deleteById(id);
+    public void deletarContasCadastradas(Long codigo) {
+        iContasAReceberRepository.deleteById(codigo);
     }
 
-    public void deletarContasCgadastradas(Long id) {
-        iContasAReceberRepository.deleteById(id);
-    }
 }
 
