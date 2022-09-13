@@ -41,7 +41,7 @@ public class ContasAReceberController {
 
     @DeleteMapping(path = "/{id}")
     public void deletarContasCadastradas(@PathVariable Long id) {
-        contasAReceberService.deletarContasCadastradas(id);
+        contasAReceberService.deletarContasCgadastradas(id);
     }
 
 }
