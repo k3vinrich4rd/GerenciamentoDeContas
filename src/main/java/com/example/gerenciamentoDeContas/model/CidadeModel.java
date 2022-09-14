@@ -29,7 +29,8 @@ public class CidadeModel {
     @JoinColumn(name = "estado_id", referencedColumnName = "codigo")
     private EstadoModel estadoModel;
 
-    @JsonIgnore
+
+    @JsonIgnore // Pergunta para grazi sobre os mapeamentos.
     @OneToMany(mappedBy = "cidadeModel", cascade = CascadeType.ALL)
     private List<EnderecoModel> enderecoModel = new ArrayList<>();
 }

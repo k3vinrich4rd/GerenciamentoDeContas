@@ -21,28 +21,28 @@ public class EnderecoController {
     private EnderecoService enderecoService;
 
     @PostMapping
-    public ResponseEntity<EnderecoModel> cadastrarNovoEndereco(@Valid @RequestBody EnderecoModel enderecoModel){
+    public ResponseEntity<EnderecoModel> cadastrarNovoEndereco(@Valid @RequestBody EnderecoModel enderecoModel) {
         EnderecoModel endereco = enderecoService.cadastrarNovosEnderecos(enderecoModel);
         return new ResponseEntity<>(endereco, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<EnderecoModel>> exibirEnderecosCadastrados(){
+    public ResponseEntity<List<EnderecoModel>> exibirEnderecosCadastrados() {
         return ResponseEntity.ok(enderecoService.exibirEnderecos());
     }
 
     @GetMapping(path = "/{codigo}")
-    public ResponseEntity<Optional<EnderecoModel>> exibirViaId(@PathVariable Long codigo){
+    public ResponseEntity<Optional<EnderecoModel>> exibirViaId(@PathVariable Long codigo) {
         return ResponseEntity.ok(enderecoService.exibirEnderecoViaId(codigo));
     }
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<EnderecoModel> alterarEndereco(@Valid @RequestBody EnderecoModel enderecoModel){
+    public ResponseEntity<EnderecoModel> alterarEndereco(@Valid @RequestBody EnderecoModel enderecoModel) {
         return ResponseEntity.ok(enderecoService.alterarEnderecoCadastrado(enderecoModel));
     }
 
     @DeleteMapping(path = "/{codigo}")
-    public void deleterEnderecoCadastrado(@PathVariable Long codigo){
+    public void deleterEnderecoCadastrado(@PathVariable Long codigo) {
         enderecoService.deletarEndereco(codigo);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
+import com.example.gerenciamentoDeContas.model.response.ContasAReceberResponse;
+import com.example.gerenciamentoDeContas.repository.IContasAReceberRepository;
 import com.example.gerenciamentoDeContas.service.ContasAReceberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ public class ContasAReceberController {
     @Autowired
     private ContasAReceberService contasAReceberService;
 
+    @Autowired
+    private IContasAReceberRepository iContasAReceberRepository;
+
     @PostMapping
     public ResponseEntity<ContasReceberModel> cadastrarContaDeRecebimento(@RequestBody ContasReceberModel contasReceberModel) {
         ContasReceberModel contas = contasAReceberService.cadastrarNovoRecebimento(contasReceberModel);
@@ -24,8 +29,8 @@ public class ContasAReceberController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ContasReceberModel>> exibirContasCadastradas() {
-        return ResponseEntity.ok(contasAReceberService.exibirContas());
+    public ResponseEntity<List<ContasAReceberResponse>> exibirContasCadastradas() {
+        return ResponseEntity.ok(contasAReceberService.exibirTodosRecebimentos());
     }
 
     @GetMapping(path = "/{codigo}")
@@ -34,13 +39,23 @@ public class ContasAReceberController {
     }
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@RequestBody ContasReceberModel contasReceberModel) {
-        return ResponseEntity.ok(contasAReceberService.atualizarContas(contasReceberModel));
+    public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@RequestBody ContasReceberModel contasReceberModel, @PathVariable Long codigo) {
+        if (!iContasAReceberRepository.existsById(codigo)) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
+        return ResponseEntity.ok(contasAReceberService.atualizarContas(contasReceberModel, codigo));
     }
 
     @DeleteMapping(path = "/{codigo}")
-    public void deletarContasCadastradas(@PathVariable Long codigo) {
+    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
+    public ResponseEntity deletar(@PathVariable Long codigo) {
+        if (!iContasAReceberRepository.existsById(codigo)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
+
+        }
         contasAReceberService.deletarContasCadastradas(codigo);
+        return null;
     }
+
 
 }

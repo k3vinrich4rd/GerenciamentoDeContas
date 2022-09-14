@@ -21,28 +21,28 @@ public class EstadoController {
     private EstadoService estadoService;
 
     @PostMapping
-    public ResponseEntity<EstadoModel> cadastrarEstados(@Valid @RequestBody EstadoModel estadoModel){
+    public ResponseEntity<EstadoModel> cadastrarEstados(@Valid @RequestBody EstadoModel estadoModel) {
         EstadoModel estado = estadoService.cadastrarEstados(estadoModel);
         return new ResponseEntity<>(estado, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<EstadoModel>> exibirEstadosCadastrados(){
+    public ResponseEntity<List<EstadoModel>> exibirEstadosCadastrados() {
         return ResponseEntity.ok(estadoService.exibirEstados());
     }
 
     @GetMapping(path = "/{codigo}")
-    public ResponseEntity<Optional<EstadoModel>> exibirEstadosViaId(@PathVariable Long codigo){
+    public ResponseEntity<Optional<EstadoModel>> exibirEstadosViaId(@PathVariable Long codigo) {
         return ResponseEntity.ok(estadoService.exibirEstadosViaId(codigo));
     }
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<EstadoModel> alterarEstadosCadastrados(@Valid @RequestBody EstadoModel estadoModel){
+    public ResponseEntity<EstadoModel> alterarEstadosCadastrados(@Valid @RequestBody EstadoModel estadoModel) {
         return ResponseEntity.ok(estadoService.alterarEstadosCadastrados(estadoModel));
     }
 
     @DeleteMapping(path = "/{codigo}")
-    public void deletarEstadosCadastrados(@PathVariable Long codigo){
+    public void deletarEstadosCadastrados(@PathVariable Long codigo) {
         estadoService.deletarEstados(codigo);
     }
 }

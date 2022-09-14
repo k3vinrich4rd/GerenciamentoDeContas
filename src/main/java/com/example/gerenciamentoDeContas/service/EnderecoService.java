@@ -18,7 +18,8 @@ public class EnderecoService {
     public EnderecoModel cadastrarNovosEnderecos(EnderecoModel enderecoModel) {
         return iEnderecoRepository.save(enderecoModel);
     }
-    public List<EnderecoModel> exibirEnderecos(){
+
+    public List<EnderecoModel> exibirEnderecos() {
         return iEnderecoRepository.findAll();
     }
 

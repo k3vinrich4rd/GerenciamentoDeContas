@@ -19,7 +19,7 @@ public class EstadoService {
         return iEstadoRepository.save(estadoModel);
     }
 
-    public List<EstadoModel> exibirEstados(){
+    public List<EstadoModel> exibirEstados() {
         return iEstadoRepository.findAll();
     }
 

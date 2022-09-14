@@ -1,15 +1,22 @@
 package com.example.gerenciamentoDeContas.model.recebimentos;
 
+import com.example.gerenciamentoDeContas.enumeric.RecebimentoAlugueis;
+import com.example.gerenciamentoDeContas.enumeric.TipoRecebimento;
+
 public class CalculoRecebimentoFactory {
 
-    public static CalculoDeRecebimentos tipoDeRecebimentos(String tipoDeRecebimentos){
-        if (tipoDeRecebimentos.equalsIgnoreCase("EM_ATRASO")){
+    public static CalculoDeRecebimentos tipoDeRecebimentos(RecebimentoAlugueis recebimentoAlugueis, TipoRecebimento tipoRecebimento) {
+        if (recebimentoAlugueis == RecebimentoAlugueis.EM_ATRASO) {
             return new EmAtraso();
-        } else if (tipoDeRecebimentos.equalsIgnoreCase("EM_DIA")) {
+        } else if (recebimentoAlugueis == RecebimentoAlugueis.EM_DIA) {
             return new EmDia();
-        } else if (tipoDeRecebimentos.equalsIgnoreCase("ADIANTADO")) {
+        } else if (recebimentoAlugueis == RecebimentoAlugueis.ADIANTADO) {
             return new Adiantado();
-        }else {
+        } else if (tipoRecebimento == TipoRecebimento.EMPREGO_CLT) {
+            return new EmpregosClt();
+        } else if (tipoRecebimento == TipoRecebimento.FREELANCER) {
+            return new Freelancer();
+        } else {
             return null;
         }
     }

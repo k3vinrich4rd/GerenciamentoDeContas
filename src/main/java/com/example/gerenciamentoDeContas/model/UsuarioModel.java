@@ -1,6 +1,5 @@
 package com.example.gerenciamentoDeContas.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -29,7 +26,7 @@ public class UsuarioModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
-     @Column(name = "nome_usuario", length = 55, nullable = false)
+    @Column(name = "nome_usuario", length = 55, nullable = false)
     private String nomeUsuario;
 
     @Column(name = "data_de_nascimento", length = 15, nullable = false)
@@ -37,19 +34,20 @@ public class UsuarioModel implements Serializable {
 
     @Column(name = "email_usuario", length = 50, nullable = false)
     @Email(message = "Erro, email inválido")
-    @NotBlank(message = "Erro, e-mail não informado")
+    @NotEmpty(message = "Erro, e-mail não informado")
     private String email;
 
     @Column(name = "cpf_usuario", length = 14, nullable = false)
     @CPF(message = "Cpf inválido")
-    @NotBlank(message = "Erro, cpf não informado")
+    @NotEmpty(message = "Erro, cpf não informado")
     private String cpf;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
-    private List<EnderecoModel> enderecoModel = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "endereco_id", referencedColumnName = "codigo")
+    private EnderecoModel enderecoModel;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
-    private List<ContasReceberModel> contasReceberModel = new ArrayList<>();
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
+//    private List<ContasReceberModel> contasReceberModel = new ArrayList<>();
 }
