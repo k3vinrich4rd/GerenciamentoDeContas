@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -47,7 +50,7 @@ public class UsuarioModel implements Serializable {
     private EnderecoModel enderecoModel;
 
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
-//    private List<ContasReceberModel> contasReceberModel = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
+    private List<ContasReceberModel> contasReceberModel = new ArrayList<>();
 }
