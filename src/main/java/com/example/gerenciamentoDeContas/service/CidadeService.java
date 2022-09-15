@@ -25,11 +25,11 @@ public class CidadeService {
     }
 
     public Optional<CidadeModel> exibirCidadeViaId(Long codigo) {
-        return Optional.ofNullable(iCidadeRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca"))));
+        return Optional.ofNullable(iCidadeRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
     public CidadeModel alterarCidadeCadastrada(CidadeModel cidadeModel, Long codigo) {
-        iCidadeRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração"));
+        iCidadeRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iCidadeRepository.save(cidadeModel);
     }
 

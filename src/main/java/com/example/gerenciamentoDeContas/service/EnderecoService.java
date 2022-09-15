@@ -24,11 +24,11 @@ public class EnderecoService {
     }
 
     public Optional<EnderecoModel> exibirEnderecosViaId(Long codigo) {
-        return Optional.ofNullable(iEnderecoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca"))));
+        return Optional.ofNullable(iEnderecoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
     public EnderecoModel alterarEnderecosCadastrados(EnderecoModel enderecoModel, Long codigo) {
-        iEnderecoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração"));
+        iEnderecoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iEnderecoRepository.save(enderecoModel);
     }
 

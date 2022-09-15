@@ -22,7 +22,7 @@ import java.util.Map;
 public class ExceptionHandlerContasAPagar {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> exceptionHandlerEntradaInvalida(HttpMessageNotReadableException ex) {
-        return new ResponseEntity<>("Campo não encontrado, impossível efetuar atualização.", HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>("Campo inválido.", HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Getter

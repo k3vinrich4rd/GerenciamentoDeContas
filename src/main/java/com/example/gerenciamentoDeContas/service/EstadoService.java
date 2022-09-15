@@ -26,11 +26,11 @@ public class EstadoService {
     }
 
     public Optional<EstadoModel> exibirEstadoViaId(Long codigo) {
-        return Optional.ofNullable(iEstadoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca"))));
+        return Optional.ofNullable(iEstadoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
     public EstadoModel alterarEstadoCadastrado(EstadoModel estadoModel, Long codigo) {
-        iEstadoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração"));
+        iEstadoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iEstadoRepository.save(estadoModel);
     }
 
