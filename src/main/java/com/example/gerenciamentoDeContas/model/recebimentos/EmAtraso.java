@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class EmAtraso implements CalculoDeRecebimentos {
     @Override
     public BigDecimal calculoDeRecebimentos(ContasReceberModel contasReceberModel) {
-        BigDecimal resultado = contasReceberModel.getValorRecebimento().multiply(new BigDecimal("0.035"));
+        BigDecimal resultado = contasReceberModel.getValorRecebimento().multiply(new BigDecimal(String.valueOf(0.035)));
         return contasReceberModel.getValorRecebimento().add(resultado);
     }
 }

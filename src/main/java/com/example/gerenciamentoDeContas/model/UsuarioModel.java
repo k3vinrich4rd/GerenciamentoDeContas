@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ public class UsuarioModel implements Serializable {
     private Long codigo;
 
     @Column(name = "nome_usuario", length = 55, nullable = false)
+    @NotBlank(message = "Erro: nome do usuario não informado")
     private String nomeUsuario;
 
     @Column(name = "data_de_nascimento", length = 15, nullable = false)

@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
+import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
 import com.example.gerenciamentoDeContas.model.EnderecoModel;
 import com.example.gerenciamentoDeContas.repository.IEnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,27 +12,27 @@ import java.util.Optional;
 @Service
 public class EnderecoService {
 
-
     @Autowired
     private IEnderecoRepository iEnderecoRepository;
 
-    public EnderecoModel cadastrarNovosEnderecos(EnderecoModel enderecoModel) {
+    public EnderecoModel cadastrarEndereco(EnderecoModel enderecoModel) {
         return iEnderecoRepository.save(enderecoModel);
     }
 
-    public List<EnderecoModel> exibirEnderecos() {
+    public List<EnderecoModel> exibirTodosEnderecos() {
         return iEnderecoRepository.findAll();
     }
 
-    public Optional<EnderecoModel> exibirEnderecoViaId(Long codigo) {
-        return iEnderecoRepository.findById(codigo);
+    public Optional<EnderecoModel> exibirEnderecosViaId(Long codigo) {
+        return Optional.ofNullable(iEnderecoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca"))));
     }
 
-    public EnderecoModel alterarEnderecoCadastrado(EnderecoModel enderecoModel) {
+    public EnderecoModel alterarEnderecosCadastrados(EnderecoModel enderecoModel, Long codigo) {
+        iEnderecoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração"));
         return iEnderecoRepository.save(enderecoModel);
     }
 
-    public void deletarEndereco(Long codigo) {
+    public void deletarEnderecosCadastrados(Long codigo) {
         iEnderecoRepository.deleteById(codigo);
     }
 }

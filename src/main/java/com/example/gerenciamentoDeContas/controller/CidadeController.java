@@ -1,6 +1,7 @@
 package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.model.CidadeModel;
+import com.example.gerenciamentoDeContas.repository.ICidadeRepository;
 import com.example.gerenciamentoDeContas.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class CidadeController {
     @Autowired
     private CidadeService cidadeService;
 
+    @Autowired
+    private ICidadeRepository iCidadeRepository;
+
     @PostMapping
     public ResponseEntity<CidadeModel> cadastrarCidade(@Valid @RequestBody CidadeModel cidadeModel) {
         CidadeModel cidade = cidadeService.cadastrarCidade(cidadeModel);
@@ -28,22 +32,31 @@ public class CidadeController {
 
     @GetMapping
     public ResponseEntity<List<CidadeModel>> exibirCidadesCadastrada() {
-        return ResponseEntity.ok(cidadeService.exibirCidades());
+        return ResponseEntity.ok(cidadeService.exibirTodasAsCidades());
     }
 
     @GetMapping(path = "/{codigo}")
     public ResponseEntity<Optional<CidadeModel>> exibirCidadesViaId(@PathVariable Long codigo) {
-        return ResponseEntity.ok(cidadeService.exibirCidadesViaId(codigo));
+        return ResponseEntity.ok(cidadeService.exibirCidadeViaId(codigo));
     }
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<CidadeModel> alterarCidadeCadastrada(@Valid @RequestBody CidadeModel cidadeModel) {
-        return ResponseEntity.ok(cidadeService.alterarCidadesCadastradas(cidadeModel));
+    public ResponseEntity<CidadeModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody CidadeModel cidadeModel) {
+        if (!iCidadeRepository.existsById(codigo)) {
+            return ResponseEntity.unprocessableEntity().build(); // retorna 422
+        }
+        return ResponseEntity.ok(cidadeService.alterarCidadeCadastrada(cidadeModel, codigo));
     }
 
 
     @DeleteMapping(path = "/{codigo}")
-    public void deletarCidadesCadastradas(@PathVariable Long codigo) {
+    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
+    public ResponseEntity deletar(@PathVariable Long codigo) {
+        if (!iCidadeRepository.existsById(codigo)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
+
+        }
         cidadeService.deletarCidadesCadastradas(codigo);
+        return null;
     }
 }

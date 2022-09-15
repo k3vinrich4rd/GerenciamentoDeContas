@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
+import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
 import com.example.gerenciamentoDeContas.model.CidadeModel;
 import com.example.gerenciamentoDeContas.repository.ICidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,16 @@ public class CidadeService {
         return iCidadeRepository.save(cidadeModel);
     }
 
-    public List<CidadeModel> exibirCidades() {
+    public List<CidadeModel> exibirTodasAsCidades() {
         return iCidadeRepository.findAll();
     }
 
-    public Optional<CidadeModel> exibirCidadesViaId(Long codigo) {
-        return iCidadeRepository.findById(codigo);
+    public Optional<CidadeModel> exibirCidadeViaId(Long codigo) {
+        return Optional.ofNullable(iCidadeRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca"))));
     }
 
-    public CidadeModel alterarCidadesCadastradas(CidadeModel cidadeModel) {
+    public CidadeModel alterarCidadeCadastrada(CidadeModel cidadeModel, Long codigo) {
+        iCidadeRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração"));
         return iCidadeRepository.save(cidadeModel);
     }
 

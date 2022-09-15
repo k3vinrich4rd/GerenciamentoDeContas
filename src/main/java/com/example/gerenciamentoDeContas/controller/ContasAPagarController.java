@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,23 +58,31 @@ public class ContasAPagarController {
     }
 
 
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<ContasAPagarModel> alterarStatusDasContas(@RequestBody AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, @PathVariable Long id) {
-        if (!contasAPagarRepository.existsById(id)) {
+    @PutMapping(path = "/{codigo}")
+    public ResponseEntity<ContasAPagarModel> alterarStatusDasContas(@Valid @PathVariable Long codigo, @RequestBody AlterarStatusPagamentoRequest alterarStatusPagamentoRequest) {
+        if (!contasAPagarRepository.existsById(codigo)) {
             return ResponseEntity.unprocessableEntity().build(); // Retorna 422
         }
-        return ResponseEntity.ok(contasAPagarService.alterarRegistrosDePagamento(alterarStatusPagamentoRequest, id));
+        return ResponseEntity.ok(contasAPagarService.alterarRegistrosDePagamento(alterarStatusPagamentoRequest, codigo));
     }
 
 
-    @DeleteMapping(path = "/{id}")
+
+
+
+
+
+
+
+
+    @DeleteMapping(path = "/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable Long id) {
-        if (!contasAPagarRepository.existsById(id)) {
+    public ResponseEntity deletar(@PathVariable Long codigo) {
+        if (!contasAPagarRepository.existsById(codigo)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
 
         }
-        contasAPagarService.deletarConta(id);
+        contasAPagarService.deletarConta(codigo);
         return null;
     }
 
