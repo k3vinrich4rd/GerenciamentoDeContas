@@ -10,7 +10,7 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PadraoErro implements Serializable { // Tratamento de erro para not Found
+public class PadraoErro implements Serializable { // Tratamento de erro para not Foundl
 
     private Instant timestamp;
     private Integer status;

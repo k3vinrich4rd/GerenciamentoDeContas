@@ -67,14 +67,6 @@ public class ContasAPagarController {
     }
 
 
-
-
-
-
-
-
-
-
     @DeleteMapping(path = "/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
     public ResponseEntity deletar(@PathVariable Long codigo) {

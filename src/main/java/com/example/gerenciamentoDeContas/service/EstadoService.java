@@ -1,7 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
 import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
-import com.example.gerenciamentoDeContas.model.CidadeModel;
 import com.example.gerenciamentoDeContas.model.EstadoModel;
 import com.example.gerenciamentoDeContas.repository.IEstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
