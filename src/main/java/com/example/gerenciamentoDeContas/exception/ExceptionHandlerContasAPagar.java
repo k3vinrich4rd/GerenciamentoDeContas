@@ -34,6 +34,7 @@ public class ExceptionHandlerContasAPagar {
         private String mensagemDoDev;
     }
 
+    //Métodos de tratamento de mensagens de bad request
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
@@ -46,6 +47,7 @@ public class ExceptionHandlerContasAPagar {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
+    //Método de tratamento de mensagens not found
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<PadraoErro> entityNotFound(EntityNotFoundException e, HttpServletRequest servletRequest) {
         PadraoErro erro = new PadraoErro();

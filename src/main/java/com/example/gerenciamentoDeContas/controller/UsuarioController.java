@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+//Controller com o mapeamento e validated para validações existentes
 @RestController
 @Validated
 @RequestMapping(path = "/usuarios")

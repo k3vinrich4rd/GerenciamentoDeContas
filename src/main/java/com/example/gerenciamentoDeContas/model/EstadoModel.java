@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//Métodos assessores, modificadores, construtor, construtor vazio, entidade e tabela
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,17 +19,19 @@ import java.util.List;
 @Table(name = "estados")
 public class EstadoModel {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    private Long codigo; // Primary key
 
     @Column(name = "uf_estado", length = 2, nullable = false)
-    private String uf;
+    private String uf; //Coluna
 
     @Column(name = "nome_estado", length = 50, nullable = false)
-    private String nomeEstado;
+    private String nomeEstado; //Coluna
 
     @JsonIgnore
+    //Relacionamento de um para muitos
     @OneToMany(mappedBy = "estadoModel", cascade = CascadeType.ALL)
     private List<CidadeModel> cidadeModel = new ArrayList<>();
 }

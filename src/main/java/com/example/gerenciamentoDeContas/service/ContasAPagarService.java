@@ -1,6 +1,5 @@
 package com.example.gerenciamentoDeContas.service;
 // Caso estiver assim, não precisará repetir a escrita do Enum
-
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
 import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
@@ -25,15 +24,17 @@ public class ContasAPagarService {
 
     public ContasAPagarModel cadastrarContas(ContasAPagarModel contasAPagarModel) {
         Boolean pagamentoEmDia = LocalDate.now().isBefore(contasAPagarModel.getDataDeVencimento()) || LocalDate.now().equals(contasAPagarModel.getDataDeVencimento());
-        if (Boolean.FALSE.equals(pagamentoEmDia)) {
-            contasAPagarModel.setStatus(VENCIDA);
+        if (Boolean.FALSE.equals(pagamentoEmDia)) { //Se o pagamento for antes da data de vencimento e no mesmo dia
+            contasAPagarModel.setStatus(VENCIDA); //Vai retornar "Vencida" (por conta da negação)
         } else {
-            contasAPagarModel.setStatus(AGUARDANDO);
+            contasAPagarModel.setStatus(AGUARDANDO); //Se não vai retornar "Aguardando"
         }
         return contasAPagarRepository.save(contasAPagarModel);
     }
 
 
+
+    //Método para exibir somente os atributos abaixo (coluna)
     public List<ContasAPagarResponse> exibirTodosRegistrosDePagamento() {
 
         List<ContasAPagarResponse> contasAPagarResposta = new ArrayList<>();
@@ -54,6 +55,7 @@ public class ContasAPagarService {
         return contasAPagarRepository.findById(codigo);
     }
 
+    //Método para mudar apenas o status de pagamento e quando ocorrer essa mudança colocar a hora atual com data
     public ContasAPagarModel alterarRegistrosDePagamento(AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, Long codigo) {
         ContasAPagarModel contasAPagar = contasAPagarRepository.findById(codigo).get(); // Transforma em um objeto comum
         contasAPagar.setStatus(alterarStatusPagamentoRequest.getStatus());

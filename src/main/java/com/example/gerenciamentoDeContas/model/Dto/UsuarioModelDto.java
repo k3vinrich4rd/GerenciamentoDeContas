@@ -7,11 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+//Métodos assessores, modificadores, construtor e construtor vazio
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//Classe Dto (criada para aparecer somente os métodos abaixo, quando fazer a requisição de busca
+// para visualizar um usuário
 public class UsuarioModelDto {
 
     private Long codigo;

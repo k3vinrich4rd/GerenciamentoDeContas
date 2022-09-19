@@ -1,8 +1,9 @@
 package com.example.gerenciamentoDeContas.service;
 
 import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
+import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
-import com.example.gerenciamentoDeContas.model.recebimentos.CalculoRecebimentoFactory;
+import com.example.gerenciamentoDeContas.model.recebimentosfactory.CalculoRecebimentoFactory;
 import com.example.gerenciamentoDeContas.repository.IContasAReceberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.example.gerenciamentoDeContas.enumeric.RecebimentoAlugueis.*;
+import static com.example.gerenciamentoDeContas.enumeric.Status.AGUARDANDO;
+import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
 
 @Service
 public class ContasAReceberService {
@@ -23,21 +26,18 @@ public class ContasAReceberService {
     private IContasAReceberRepository iContasAReceberRepository;
 
     public ContasReceberModel cadastrarNovoRecebimento(ContasReceberModel contasReceberModel) { // Setamento da status do recebimento
-//        Boolean recebimentoEmDia = LocalDate.now().isBefore(contasReceberModel.getDataDeVencimento()) || LocalDate.now().equals(contasReceberModel.getDataDeVencimento());
-        if (contasReceberModel.getDataDeVencimento().isBefore(LocalDate.now())) {
-            contasReceberModel.setRecebimentoAlugueis(EM_ATRASO);
-        } else if (contasReceberModel.getDataDeVencimento().isEqual(LocalDate.now())) { //isEqual Para horário
-            contasReceberModel.setRecebimentoAlugueis(EM_DIA);
-        } else if (contasReceberModel.getDataDeVencimento().isAfter(LocalDate.now())) {
-            contasReceberModel.setRecebimentoAlugueis(ADIANTADO);
+        if (contasReceberModel.getDataDeVencimento().isBefore(LocalDate.now())) { // Se a data de vencimento for antes do pagamento (que no caso é hoje)
+            contasReceberModel.setRecebimentoAlugueis(EM_ATRASO); //Retorna em atraso
+        } else if (contasReceberModel.getDataDeVencimento().isEqual(LocalDate.now())) { // Se a data de vencimento e pagamento for hoje (//isEqual Para horário)
+            contasReceberModel.setRecebimentoAlugueis(EM_DIA); //Retorna em dia
+        } else if (contasReceberModel.getDataDeVencimento().isAfter(LocalDate.now())) { //Se a data de vencimento for depois do pagamento
+            contasReceberModel.setRecebimentoAlugueis(ADIANTADO); //Retorna adiantado
         } else {
             return null;
         }
 
-        if (contasReceberModel.getStatus().equalsIgnoreCase("pago")) {
-            contasReceberModel.setDataDeRecebimento(LocalDateTime.now());
-        }
 
+        //Conexão com a factory
         BigDecimal resposta = (BigDecimal) CalculoRecebimentoFactory.tipoDeRecebimentos(contasReceberModel.getRecebimentoAlugueis(),
                 contasReceberModel.getTipoRecebimento()).calculoDeRecebimentos(contasReceberModel);
         contasReceberModel.setValorRecebimento(resposta);
@@ -54,6 +54,7 @@ public class ContasAReceberService {
         return Optional.ofNullable(iContasAReceberRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado" + codigo))));
     }
 
+    //Lógica criada para setar a hora do pagamento quando o usuário informar "pago"
     public ContasReceberModel atualizarContas(ContasReceberModel contasReceberModel) {
         if (contasReceberModel.getStatus().equalsIgnoreCase("pago")) {
             contasReceberModel.setDataDeRecebimento(LocalDateTime.now());

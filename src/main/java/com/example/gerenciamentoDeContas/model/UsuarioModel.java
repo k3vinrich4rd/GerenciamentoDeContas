@@ -17,6 +17,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//Métodos assessores, modificadores, construtor, construtor vazio, entidade, tabela e validated
+//Para fazer validações
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,35 +26,36 @@ import java.util.List;
 @Entity
 @Table(name = "usuarios")
 @Validated
+
 public class UsuarioModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    private Long codigo; //Primary key
 
     @Column(name = "nome_usuario", length = 55, nullable = false)
     @NotBlank(message = "Erro: nome do usuario não informado")
-    private String nomeUsuario;
+    private String nomeUsuario; //Coluna com validações
 
     @Column(name = "data_de_nascimento", length = 15, nullable = false)
-    private LocalDate dataDeNascimento;
+    private LocalDate dataDeNascimento; //Coluna do tipo localDate
 
     @Column(name = "email_usuario", length = 50, nullable = false)
     @Email(message = "Erro, email inválido")
     @NotEmpty(message = "Erro, e-mail não informado")
-    private String email;
+    private String email; //Coluna com validações
 
     @Column(name = "cpf_usuario", length = 14, nullable = false)
     @CPF(message = "Cpf inválido")
     @NotEmpty(message = "Erro, cpf não informado")
-    private String cpf;
+    private String cpf; //Coluna com validações
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_id", referencedColumnName = "codigo")
-    private EnderecoModel enderecoModel;
+    @ManyToOne // Relacionamento muitos para um
+    @JoinColumn(name = "endereco_id", referencedColumnName = "codigo") // Junção de tabelas
+    private EnderecoModel enderecoModel; // foreign key
 
 
-    @JsonIgnore
+    @JsonIgnore // Mapeamento um para muitos
     @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)
     private List<ContasReceberModel> contasReceberModel = new ArrayList<>();
 }

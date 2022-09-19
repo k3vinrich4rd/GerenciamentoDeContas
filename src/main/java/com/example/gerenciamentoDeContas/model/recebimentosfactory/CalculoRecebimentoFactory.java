@@ -1,9 +1,11 @@
-package com.example.gerenciamentoDeContas.model.recebimentos;
+package com.example.gerenciamentoDeContas.model.recebimentosfactory;
 
 import com.example.gerenciamentoDeContas.enumeric.RecebimentoAlugueis;
 import com.example.gerenciamentoDeContas.enumeric.TipoRecebimento;
 
+//Classe factory que faz uma estrutura condicional com base no que o usuário informar
 public class CalculoRecebimentoFactory {
+
 
     public static CalculoDeRecebimentos tipoDeRecebimentos(RecebimentoAlugueis recebimentoAlugueis, TipoRecebimento tipoRecebimento) {
         if (recebimentoAlugueis == RecebimentoAlugueis.EM_ATRASO) {
