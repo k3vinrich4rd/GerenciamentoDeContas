@@ -4,13 +4,13 @@ import com.example.gerenciamentoDeContas.model.ContasReceberModel;
 import com.example.gerenciamentoDeContas.model.recebimentosfactory.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 
-@SpringBootApplication
+
 public class CalculosContasAReceberTests {
 
+    //Teste unitários
     @Test
     void TestandoCalculoDeContasAReceberEmAtraso() {
         ContasReceberModel contasReceberModel = new ContasReceberModel(); //declaração da classe e objeto usado para acesso
@@ -59,7 +59,7 @@ public class CalculosContasAReceberTests {
 
 
     @Test
-    void TestandoCalculosDeContasAReceberFreelancer(){
+    void TestandoCalculosDeContasAReceberFreelancer() {
         ContasReceberModel contasReceberModel = new ContasReceberModel(); //declaração da classe e objeto usado para acesso
         contasReceberModel.setValorRecebimento(new BigDecimal("100")); // Usando o objeto declarado
         // para setar o valor de recebimento para simular o calculo da taxa
