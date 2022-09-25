@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 // Caso estiver assim, não precisará repetir a escrita do Enum
+
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
 import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
@@ -31,7 +32,6 @@ public class ContasAPagarService {
         }
         return contasAPagarRepository.save(contasAPagarModel);
     }
-
 
 
     //Método para exibir somente os atributos abaixo (coluna)
