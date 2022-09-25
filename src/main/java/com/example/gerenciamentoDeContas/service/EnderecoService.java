@@ -33,7 +33,8 @@ public class EnderecoService {
         return iEnderecoRepository.save(enderecoModel);
     }
 
-    public void deletarEnderecosCadastrados(Long codigo) {
+    public EnderecoService deletarEnderecosCadastrados(Long codigo) {
         iEnderecoRepository.deleteById(codigo);
+        return null;
     }
 }
