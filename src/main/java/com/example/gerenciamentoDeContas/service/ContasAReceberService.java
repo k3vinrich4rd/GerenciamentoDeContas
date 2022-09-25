@@ -1,7 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
 import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
-import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
 import com.example.gerenciamentoDeContas.model.recebimentosfactory.CalculoRecebimentoFactory;
 import com.example.gerenciamentoDeContas.repository.IContasAReceberRepository;
@@ -15,8 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.example.gerenciamentoDeContas.enumeric.RecebimentoAlugueis.*;
-import static com.example.gerenciamentoDeContas.enumeric.Status.AGUARDANDO;
-import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
 
 @Service
 public class ContasAReceberService {
