@@ -43,7 +43,7 @@ public class EnderecoController {
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<EnderecoModel> alterarEnderecosCadastrados(@Valid @PathVariable Long codigo, @RequestBody EnderecoModel enderecoModel) {
         if (!iEnderecoRepository.existsById(codigo)) {
-            return ResponseEntity.unprocessableEntity().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // retorna 422
         }
         return ResponseEntity.ok(enderecoService.alterarEnderecosCadastrados(enderecoModel, codigo));
     }
@@ -54,7 +54,6 @@ public class EnderecoController {
     public ResponseEntity deletar(@PathVariable Long codigo) {
         if (!iEnderecoRepository.existsById(codigo)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
-
         }
         enderecoService.deletarEnderecosCadastrados(codigo);
         return null;

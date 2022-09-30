@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+
 //Controller com o mapeamento e validated para validações existentes
 @RestController
 @Validated
@@ -42,8 +43,9 @@ public class CidadeController {
 
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<CidadeModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody CidadeModel cidadeModel) {
+
         if (!iCidadeRepository.existsById(codigo)) {
-            return ResponseEntity.unprocessableEntity().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // Retorna 404
         }
         return ResponseEntity.ok(cidadeService.alterarCidadeCadastrada(cidadeModel, codigo));
     }

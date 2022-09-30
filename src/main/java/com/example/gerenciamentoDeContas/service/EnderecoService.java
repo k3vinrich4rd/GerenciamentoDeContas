@@ -1,6 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
-import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncontrada;
+import com.example.gerenciamentoDeContas.exception.EntityNotFoundException;
 import com.example.gerenciamentoDeContas.model.EnderecoModel;
 import com.example.gerenciamentoDeContas.repository.IEnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ public class EnderecoService {
     }
 
     public Optional<EnderecoModel> exibirEnderecosViaId(Long codigo) {
-        return Optional.ofNullable(iEnderecoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
+        return Optional.ofNullable(iEnderecoRepository.findById(codigo).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
     public EnderecoModel alterarEnderecosCadastrados(EnderecoModel enderecoModel, Long codigo) {
-        iEnderecoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
+        iEnderecoRepository.findById(codigo).orElseThrow(() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iEnderecoRepository.save(enderecoModel);
     }
 

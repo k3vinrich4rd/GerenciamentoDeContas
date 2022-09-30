@@ -11,6 +11,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PadraoErro implements Serializable { // Tratamento de erro para not Found
+    private static final Long serialVersionUID = 1L;
 
     private Instant timestamp;
     private Integer status;

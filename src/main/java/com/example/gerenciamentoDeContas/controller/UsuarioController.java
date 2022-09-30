@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 //Controller com o mapeamento e validated para validações existentes
 @RestController
 @Validated
@@ -47,7 +48,7 @@ public class UsuarioController {
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<UsuarioModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody UsuarioModel usuarioModel) {
         if (!iUsuarioRepository.existsById(codigo)) {
-            return ResponseEntity.unprocessableEntity().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // retorna 422
         }
         return ResponseEntity.ok(usuarioService.alterarUsuarioCadastrado(usuarioModel, codigo));
     }

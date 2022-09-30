@@ -59,8 +59,8 @@ public class ExceptionHandlerContasAPagar {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
 
-}
 
+}
 
 
 

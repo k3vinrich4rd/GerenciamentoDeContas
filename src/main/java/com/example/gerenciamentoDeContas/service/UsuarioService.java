@@ -1,6 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
-import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncontrada;
+import com.example.gerenciamentoDeContas.exception.EntityNotFoundException;
 import com.example.gerenciamentoDeContas.model.UsuarioModel;
 import com.example.gerenciamentoDeContas.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +27,12 @@ public class UsuarioService {
 
 
     public Optional<UsuarioModel> exibirUsuarioViaId(Long codigo) {
-        return Optional.ofNullable(iUsuarioRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
+        return Optional.ofNullable(iUsuarioRepository.findById(codigo).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar busca pelo id " + codigo))));
     }
 
 
     public UsuarioModel alterarUsuarioCadastrado(UsuarioModel usuarioModel, Long codigo) {
-        iUsuarioRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
+        iUsuarioRepository.findById(codigo).orElseThrow(() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iUsuarioRepository.save(usuarioModel);
     }
 

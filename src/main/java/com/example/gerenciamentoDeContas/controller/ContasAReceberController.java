@@ -43,7 +43,7 @@ public class ContasAReceberController {
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody ContasReceberModel contasReceberModel) {
         if (!iContasAReceberRepository.existsById(codigo)) {
-            return ResponseEntity.unprocessableEntity().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // retorna 422
         }
         return ResponseEntity.ok(contasAReceberService.atualizarContas(contasReceberModel));
     }
