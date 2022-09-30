@@ -22,6 +22,7 @@ public class ContasAReceberService {
     @Autowired
     private IContasAReceberRepository iContasAReceberRepository;
 
+
     public ContasReceberModel cadastrarNovoRecebimento(ContasReceberModel contasReceberModel) { // Setamento da status do recebimento
         if (contasReceberModel.getDataDeVencimento().isBefore(LocalDate.now())) { // Se a data de vencimento for antes do pagamento (que no caso é hoje)
             contasReceberModel.setRecebimentoAlugueis(EM_ATRASO); //Retorna em atraso
@@ -64,5 +65,7 @@ public class ContasAReceberService {
     }
 
 }
+
+
 
 

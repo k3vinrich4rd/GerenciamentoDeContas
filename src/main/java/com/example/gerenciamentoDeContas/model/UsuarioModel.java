@@ -44,7 +44,7 @@ public class UsuarioModel implements Serializable {
 
     @Column(name = "email_usuario", length = 50, nullable = false)
     @Email(message = "Erro, 'email' inválido")
-    @NotEmpty(message = "Erro, 'e-mail' não informado")
+    @NotEmpty(message = "Erro, campo 'e-mail' não informado")
     private String email; //Coluna com validações
 
     @Column(name = "cpf_usuario", length = 14, nullable = false)

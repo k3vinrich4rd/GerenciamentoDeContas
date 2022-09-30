@@ -10,6 +10,8 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,11 +34,13 @@ public class ContasReceberModel {
     private String recebimento; //Coluna
 
     @Column(name = "valor_recebimento_contas_receber", length = 200, nullable = false)
-    @Min(value = 0, message = "Erro, o valor informado tem que ser superior a 0")
+    @Min(value = 1, message = "Erro, o valor informado tem que ser superior a 0")
     private BigDecimal valorRecebimento; //Coluna
-
+    
+    //Perguntar para grazi(como validar)
     @Enumerated(EnumType.STRING) //Tipo enum
     private TipoRecebimento tipoRecebimento; //Coluna
+
 
     @Column(name = "data_de_vencimento_contas_receber", length = 25, nullable = false)
     private LocalDate dataDeVencimento; //Coluna

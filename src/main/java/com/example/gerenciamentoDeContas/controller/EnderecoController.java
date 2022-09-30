@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+
 //Controller com o mapeamento e validated para validações existentes
 @RestController
 @Validated
@@ -43,7 +44,7 @@ public class EnderecoController {
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<EnderecoModel> alterarEnderecosCadastrados(@Valid @PathVariable Long codigo, @RequestBody EnderecoModel enderecoModel) {
         if (!iEnderecoRepository.existsById(codigo)) {
-            return ResponseEntity.notFound().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // retorna 404
         }
         return ResponseEntity.ok(enderecoService.alterarEnderecosCadastrados(enderecoModel, codigo));
     }

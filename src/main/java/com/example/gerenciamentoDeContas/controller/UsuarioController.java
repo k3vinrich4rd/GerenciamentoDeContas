@@ -48,7 +48,7 @@ public class UsuarioController {
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<UsuarioModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody UsuarioModel usuarioModel) {
         if (!iUsuarioRepository.existsById(codigo)) {
-            return ResponseEntity.notFound().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // retorna 404
         }
         return ResponseEntity.ok(usuarioService.alterarUsuarioCadastrado(usuarioModel, codigo));
     }

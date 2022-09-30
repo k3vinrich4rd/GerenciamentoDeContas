@@ -43,7 +43,7 @@ public class EstadoController {
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<EstadoModel> alterarEstadosCadastrados(@Valid @PathVariable Long codigo, @RequestBody EstadoModel estadoModel) {
         if (!iEstadoRepository.existsById(codigo)) {
-            return ResponseEntity.notFound().build(); // retorna 422
+            return ResponseEntity.notFound().build(); // retorna 404
         }
         return ResponseEntity.ok(estadoService.alterarEstadoCadastrado(estadoModel, codigo));
     }
