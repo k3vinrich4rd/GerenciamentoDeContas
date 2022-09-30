@@ -1,6 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
-import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
+import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncontrada;
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
 import com.example.gerenciamentoDeContas.model.recebimentosfactory.CalculoRecebimentoFactory;
 import com.example.gerenciamentoDeContas.repository.IContasAReceberRepository;
@@ -48,7 +48,7 @@ public class ContasAReceberService {
     }
 
     public Optional<ContasReceberModel> exibirRecebimentoViaId(Long codigo) {
-        return Optional.ofNullable(iContasAReceberRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado" + codigo))));
+        return Optional.ofNullable(iContasAReceberRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado" + codigo))));
     }
 
     //Lógica criada para setar a hora do pagamento quando o usuário informar "pago"

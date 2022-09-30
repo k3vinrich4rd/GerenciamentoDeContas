@@ -1,6 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
-import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncotrada;
+import com.example.gerenciamentoDeContas.exception.SessaoDeEntidadeNaoEncontrada;
 import com.example.gerenciamentoDeContas.model.EstadoModel;
 import com.example.gerenciamentoDeContas.repository.IEstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,11 @@ public class EstadoService {
     }
 
     public Optional<EstadoModel> exibirEstadoViaId(Long codigo) {
-        return Optional.ofNullable(iEstadoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
+        return Optional.ofNullable(iEstadoRepository.findById(codigo).orElseThrow((() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
     public EstadoModel alterarEstadoCadastrado(EstadoModel estadoModel, Long codigo) {
-        iEstadoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncotrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
+        iEstadoRepository.findById(codigo).orElseThrow(() -> new SessaoDeEntidadeNaoEncontrada("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iEstadoRepository.save(estadoModel);
     }
 
