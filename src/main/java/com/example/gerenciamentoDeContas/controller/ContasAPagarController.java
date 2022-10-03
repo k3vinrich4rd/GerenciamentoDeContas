@@ -47,11 +47,13 @@ public class ContasAPagarController {
         return ResponseEntity.ok(contasAPagarService.exibirContasViaId(codigo));
     }
 
+    //Query method (método de busca)
     @GetMapping(path = "/status/{status}")
     public ResponseEntity<List<ContasAPagarModel>> exibirStatusDoPagamento(@PathVariable Status status) {
         return ResponseEntity.ok(contasAPagarRepository.findByStatus(status));
     }
 
+    //Query method (método de busca)
     @GetMapping(path = "/tipo/{tipo}")
     public ResponseEntity<List<ContasAPagarModel>> exibirTipoDoPagamento(@PathVariable Tipo tipo) {
         return ResponseEntity.ok(contasAPagarRepository.findByTipo(tipo));

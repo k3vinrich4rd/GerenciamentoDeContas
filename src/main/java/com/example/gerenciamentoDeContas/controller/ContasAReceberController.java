@@ -41,6 +41,16 @@ public class ContasAReceberController {
         return ResponseEntity.ok(contasAReceberService.exibirRecebimentoViaId(codigo));
     }
 
+    //Query method (método de busca)
+    @GetMapping(path = "/statusr/{status}" +
+            "")
+
+
+
+
+
+
+
     @PutMapping(path = "/{codigo}")
     public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody ContasReceberModel contasReceberModel) {
         if (!iContasAReceberRepository.existsById(codigo)) {

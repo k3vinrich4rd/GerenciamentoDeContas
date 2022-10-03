@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IContasAReceberRepository extends JpaRepository<ContasReceberModel, Long> {
-
+    public List<ContasReceberModel> findByStatus(String status); // Query methods (Métodos de consulta)
 }
