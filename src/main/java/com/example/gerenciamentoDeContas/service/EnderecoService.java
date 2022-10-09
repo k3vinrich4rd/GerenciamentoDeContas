@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 //Lógica e validações
@@ -24,17 +25,21 @@ public class EnderecoService {
         return iEnderecoRepository.findAll();
     }
 
-    public Optional<EnderecoModel> exibirEnderecosViaId(Long codigo) {
+    public Optional<EnderecoModel> exibirEnderecosViaId(UUID codigo) {
         return Optional.ofNullable(iEnderecoRepository.findById(codigo).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
-    public EnderecoModel alterarEnderecosCadastrados(EnderecoModel enderecoModel, Long codigo) {
+    public EnderecoModel alterarEnderecosCadastrados(EnderecoModel enderecoModel, UUID codigo) {
         iEnderecoRepository.findById(codigo).orElseThrow(() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iEnderecoRepository.save(enderecoModel);
     }
 
-    public EnderecoService deletarEnderecosCadastrados(Long codigo) {
+    public EnderecoService deletarEnderecosCadastrados(UUID codigo) {
         iEnderecoRepository.deleteById(codigo);
         return null;
+    }
+
+    public boolean existsById(UUID codigo) {
+        return iEnderecoRepository.existsById(codigo);
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @SpringBootTest
 public class ContasAPagarServiceTest {
@@ -38,7 +39,7 @@ public class ContasAPagarServiceTest {
     @DisplayName("Testando o metodo de cadastrar")
     void testeCadastrarContas() {
         iContasAPagarRepository.save(contasAPagarModel);
-        Mockito.when(iContasAPagarRepository.existsById(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(iContasAPagarRepository.existsById(Mockito.any())).thenReturn(true);
         Mockito.verify(iContasAPagarRepository, Mockito.times(1)).save(contasAPagarModel);
     }
 
@@ -52,13 +53,13 @@ public class ContasAPagarServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, se o metodo estiver correto")
     void testeExibicaoDeContasAPagarViaId() {
-        Optional<ContasAPagarModel> contasAPagarModelOptional = contasAPagarService.exibirContasViaId(1L);
+        Optional<ContasAPagarModel> contasAPagarModelOptional = contasAPagarService.exibirContasViaId(UUID.randomUUID());
         Assertions.assertTrue(true, String.valueOf(contasAPagarModelOptional));
     }
 
     @Test
     void testeDeletamentoDeContasViaId() {
-        contasAPagarService.deletarConta(1L);
+        contasAPagarService.deletarConta(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 }

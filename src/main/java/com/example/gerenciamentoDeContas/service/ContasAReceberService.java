@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.service;
 
+import com.example.gerenciamentoDeContas.enumeric.TipoRecebimento;
 import com.example.gerenciamentoDeContas.exception.EntityNotFoundException;
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
 import com.example.gerenciamentoDeContas.model.recebimentosfactory.CalculoRecebimentoFactory;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.gerenciamentoDeContas.enumeric.RecebimentoAlugueis.*;
 
@@ -34,6 +36,9 @@ public class ContasAReceberService {
             return null;
         }
 
+        if (contasReceberModel.getStatus().equalsIgnoreCase("pago")) {
+            contasReceberModel.setDataDeRecebimento(LocalDateTime.now());
+        }
 
         //Conexão com a factory
         BigDecimal resposta = (BigDecimal) CalculoRecebimentoFactory.tipoDeRecebimentos(contasReceberModel.getRecebimentoAlugueis(),
@@ -48,7 +53,7 @@ public class ContasAReceberService {
 
     }
 
-    public Optional<ContasReceberModel> exibirRecebimentoViaId(Long codigo) {
+    public Optional<ContasReceberModel> exibirRecebimentoViaId(UUID codigo) {
         return Optional.ofNullable(iContasAReceberRepository.findById(codigo).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado" + codigo))));
     }
 
@@ -60,10 +65,26 @@ public class ContasAReceberService {
         return iContasAReceberRepository.save(contasReceberModel);
     }
 
-    public void deletarContasCadastradas(Long codigo) {
+    public void deletarContasCadastradas(UUID codigo) {
         iContasAReceberRepository.deleteById(codigo);
     }
 
+    public boolean existsById(UUID codigo) {
+        return iContasAReceberRepository.existsById(codigo);
+    }
+
+    public List<ContasReceberModel> exibirViaDataDeVencimento(String dataDeVencimento) {
+        LocalDate date = LocalDate.parse(dataDeVencimento);
+        return iContasAReceberRepository.findByDataDeVencimento(date);
+    }
+
+    public List<ContasReceberModel> exibirStatusContasAReceber(String status) {
+        return iContasAReceberRepository.findByStatus(status);
+    }
+
+    public List<ContasReceberModel> exibirViaTipoRecebimento(TipoRecebimento tipoRecebimento) {
+        return iContasAReceberRepository.findByTipoRecebimento(tipoRecebimento);
+    }
 }
 
 

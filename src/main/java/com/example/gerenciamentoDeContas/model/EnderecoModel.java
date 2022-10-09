@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,10 +20,11 @@ import java.util.List;
 @Table(name = "enderecos")
 //Métodos assessores, modificadores, construtor, construtor vazio, entidade e tabela
 public class EnderecoModel implements Serializable {
+    private static final long serialVersionUID = 1L; //Controle das conversões feitas pela JVM
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo; //Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID codigo; //Primary key
 
     @Column(name = "logradouro_endereco", length = 100, nullable = false)
     private String logradouro; //Coluna

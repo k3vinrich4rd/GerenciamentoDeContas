@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 //Lógica e validações
@@ -25,16 +26,20 @@ public class EstadoService {
         return iEstadoRepository.findAll();
     }
 
-    public Optional<EstadoModel> exibirEstadoViaId(Long codigo) {
+    public Optional<EstadoModel> exibirEstadoViaId(UUID codigo) {
         return Optional.ofNullable(iEstadoRepository.findById(codigo).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar busca" + codigo))));
     }
 
-    public EstadoModel alterarEstadoCadastrado(EstadoModel estadoModel, Long codigo) {
+    public EstadoModel alterarEstadoCadastrado(EstadoModel estadoModel, UUID codigo) {
         iEstadoRepository.findById(codigo).orElseThrow(() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar uma alteração" + codigo));
         return iEstadoRepository.save(estadoModel);
     }
 
-    public void deletarEstados(Long codigo) {
+    public void deletarEstados(UUID codigo) {
         iEstadoRepository.deleteById(codigo);
+    }
+
+    public boolean existsById(UUID codigo) {
+        return iEstadoRepository.existsById(codigo);
     }
 }

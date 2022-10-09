@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 //Métodos assessores, modificadores, construtor, construtor vazio, entidade e tabela
 @Getter
@@ -18,10 +19,12 @@ import java.util.List;
 @Entity
 @Table(name = "cidades")
 public class CidadeModel {
+    private static final long serialVersionUID = 1L; //Controle das conversões feitas pela JVM
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo; //Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID codigo; //Primary key
+
 
     @Column(name = "nome_cidade", length = 75, nullable = false)
     private String nomeCidade;// coluna

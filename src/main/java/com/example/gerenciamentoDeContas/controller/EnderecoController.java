@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 //Controller com o mapeamento e validated para validações existentes
 @RestController
@@ -21,9 +22,6 @@ public class EnderecoController {
 
     @Autowired
     private EnderecoService enderecoService;
-
-    @Autowired
-    private IEnderecoRepository iEnderecoRepository;
 
     @PostMapping
     public ResponseEntity<EnderecoModel> cadastrarEndereco(@Valid @RequestBody EnderecoModel enderecoModel) {
@@ -37,13 +35,13 @@ public class EnderecoController {
     }
 
     @GetMapping(path = "/{codigo}")
-    public ResponseEntity<Optional<EnderecoModel>> exibirEnderecosViaId(@PathVariable Long codigo) {
+    public ResponseEntity<Optional<EnderecoModel>> exibirEnderecosViaId(@PathVariable UUID codigo) {
         return ResponseEntity.ok(enderecoService.exibirEnderecosViaId(codigo));
     }
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<EnderecoModel> alterarEnderecosCadastrados(@Valid @PathVariable Long codigo, @RequestBody EnderecoModel enderecoModel) {
-        if (!iEnderecoRepository.existsById(codigo)) {
+    public ResponseEntity<EnderecoModel> alterarEnderecosCadastrados(@Valid @PathVariable UUID codigo, @RequestBody EnderecoModel enderecoModel) {
+        if (!enderecoService.existsById(codigo)) {
             return ResponseEntity.notFound().build(); // retorna 404
         }
         return ResponseEntity.ok(enderecoService.alterarEnderecosCadastrados(enderecoModel, codigo));
@@ -52,8 +50,8 @@ public class EnderecoController {
 
     @DeleteMapping(path = "/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable Long codigo) {
-        if (!iEnderecoRepository.existsById(codigo)) {
+    public ResponseEntity deletar(@PathVariable UUID codigo) {
+        if (!enderecoService.existsById(codigo)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
         }
         enderecoService.deletarEnderecosCadastrados(codigo);

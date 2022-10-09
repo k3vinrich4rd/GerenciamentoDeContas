@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 public class EstadoServiceTest {
@@ -35,7 +36,7 @@ public class EstadoServiceTest {
     @DisplayName("Testando o metodo de cadastrar")
     void testeSeCadastrarServiceEstaFuncionando() {
         iEstadoRepository.save(estadoModel);
-        Mockito.when(iEstadoRepository.existsById(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(iEstadoRepository.existsById(Mockito.any())).thenReturn(true);
         Mockito.verify(iEstadoRepository, Mockito.times(1)).save(estadoModel);
     }
 
@@ -49,21 +50,21 @@ public class EstadoServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
     void testeExibirEstadoViaId() {
-        estadoService.exibirEstadoViaId(1L);
+        estadoService.exibirEstadoViaId(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de atualizar estiver funcionando corretamente")
     void testeAtualizarEstado(){
-        estadoService.alterarEstadoCadastrado(estadoModel, 1L);
+        estadoService.alterarEstadoCadastrado(estadoModel, UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo deletar via id estiver funcionando corretamente")
     void testeDeletarEstado(){
-        estadoService.deletarEstados(1L);
+        estadoService.deletarEstados(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 }

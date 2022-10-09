@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -25,10 +26,11 @@ import java.time.LocalDateTime;
 @Table(name = "contas_receber")
 //Métodos assessores, modificadores, construtor, construtor vazio, entidade e tabela
 public class ContasReceberModel {
+    private static final long serialVersionUID = 1L; //Controle das conversões feitas pela JVM
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo; //Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID codigo; //Primary key
 
     @Column(name = "recebimento_contas_receber", length = 50, nullable = false)
     private String recebimento; //Coluna

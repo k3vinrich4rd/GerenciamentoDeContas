@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 //Getters, Setters, Construtor, Construtor vazio, Entidade e Tabela que será criada dentro do banco de dados
 @Getter
@@ -20,11 +21,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "gerenciamento_de_contas")
 public class ContasAPagarModel implements Serializable {
+    private static final long serialVersionUID = 1L; //Controle das conversões feitas pela JVM
     //Model do projeto
 
     @Id // Chave primária
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo; //Atributo
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID codigo; //Atributo
 
     @Column(length = 50, nullable = false)
     private String nome; //Atributo

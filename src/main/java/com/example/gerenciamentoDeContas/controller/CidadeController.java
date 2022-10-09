@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 //Controller com o mapeamento e validated para validações existentes
 @RestController
@@ -22,8 +23,6 @@ public class CidadeController {
     @Autowired
     private CidadeService cidadeService;
 
-    @Autowired
-    private ICidadeRepository iCidadeRepository;
 
     @PostMapping
     public ResponseEntity<CidadeModel> cadastrarCidade(@Valid @RequestBody CidadeModel cidadeModel) {
@@ -37,14 +36,14 @@ public class CidadeController {
     }
 
     @GetMapping(path = "/{codigo}")
-    public ResponseEntity<Optional<CidadeModel>> exibirCidadesViaId(@PathVariable Long codigo) {
+    public ResponseEntity<Optional<CidadeModel>> exibirCidadesViaId(@PathVariable UUID codigo) {
         return ResponseEntity.ok(cidadeService.exibirCidadeViaId(codigo));
     }
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<CidadeModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody CidadeModel cidadeModel) {
+    public ResponseEntity<CidadeModel> alterarContasCadastradas(@Valid @PathVariable UUID codigo, @RequestBody CidadeModel cidadeModel) {
 
-        if (!iCidadeRepository.existsById(codigo)) {
+        if (!cidadeService.existsById(codigo)) {
             return ResponseEntity.notFound().build(); // Retorna 404
         }
         return ResponseEntity.ok(cidadeService.alterarCidadeCadastrada(cidadeModel, codigo));
@@ -53,8 +52,8 @@ public class CidadeController {
 
     @DeleteMapping(path = "/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable Long codigo) {
-        if (!iCidadeRepository.existsById(codigo)) {
+    public ResponseEntity deletar(@PathVariable UUID codigo) {
+        if (!cidadeService.existsById(codigo)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
 
         }

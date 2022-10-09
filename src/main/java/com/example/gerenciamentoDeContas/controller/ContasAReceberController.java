@@ -1,5 +1,6 @@
 package com.example.gerenciamentoDeContas.controller;
 
+import com.example.gerenciamentoDeContas.enumeric.TipoRecebimento;
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
 import com.example.gerenciamentoDeContas.repository.IContasAReceberRepository;
 import com.example.gerenciamentoDeContas.service.ContasAReceberService;
@@ -10,8 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 //Controller com o mapeamento e validated para validações existentes
 @RestController
@@ -22,8 +25,6 @@ public class ContasAReceberController {
     @Autowired
     private ContasAReceberService contasAReceberService;
 
-    @Autowired
-    private IContasAReceberRepository iContasAReceberRepository;
 
     @PostMapping
     public ResponseEntity<ContasReceberModel> cadastrarContaDeRecebimento(@Valid @RequestBody ContasReceberModel contasReceberModel) {
@@ -37,23 +38,29 @@ public class ContasAReceberController {
     }
 
     @GetMapping(path = "/{codigo}")
-    public ResponseEntity<Optional<ContasReceberModel>> exibirContasViaId(@Valid @PathVariable Long codigo) {
+    public ResponseEntity<Optional<ContasReceberModel>> exibirContasViaId(@Valid @PathVariable UUID codigo) {
         return ResponseEntity.ok(contasAReceberService.exibirRecebimentoViaId(codigo));
     }
 
-    //Query method (método de busca)
-    @GetMapping(path = "/statusr/{status}" +
-            "")
+    @GetMapping(path = "/dataDeVencimento/{dataDeVencimento}")
+    public ResponseEntity<List<ContasReceberModel>> exibirViaDataDeVencimento(@PathVariable String dataDeVencimento){
+        return ResponseEntity.ok(contasAReceberService.exibirViaDataDeVencimento(dataDeVencimento));
+    }
 
+    @GetMapping(path = "/statusContasAReceber/{status}")
+    public ResponseEntity<List<ContasReceberModel>> exibirViaStatusContasReceber(@PathVariable String status){
+        return ResponseEntity.ok(contasAReceberService.exibirStatusContasAReceber(status));
+    }
 
-
-
-
+    @GetMapping(path = "/tipoRecebimentoContasAReceber/{tipoRecebimento}")
+    public ResponseEntity<List<ContasReceberModel>> exibirViaTipoRecebimento(@PathVariable TipoRecebimento tipoRecebimento){
+        return ResponseEntity.ok(contasAReceberService.exibirViaTipoRecebimento(tipoRecebimento));
+    }
 
 
     @PutMapping(path = "/{codigo}")
-    public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@Valid @PathVariable Long codigo, @RequestBody ContasReceberModel contasReceberModel) {
-        if (!iContasAReceberRepository.existsById(codigo)) {
+    public ResponseEntity<ContasReceberModel> alterarContasCadastradas(@Valid @PathVariable UUID codigo, @RequestBody ContasReceberModel contasReceberModel) {
+        if (!contasAReceberService.existsById(codigo)) {
             return ResponseEntity.notFound().build(); // retorna 422
         }
         return ResponseEntity.ok(contasAReceberService.atualizarContas(contasReceberModel));
@@ -61,8 +68,8 @@ public class ContasAReceberController {
 
     @DeleteMapping(path = "/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable Long codigo) {
-        if (!iContasAReceberRepository.existsById(codigo)) {
+    public ResponseEntity deletar(@PathVariable UUID codigo) {
+        if (!contasAReceberService.existsById(codigo)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
 
         }

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 //Métodos assessores, modificadores, construtor, construtor vazio, entidade, tabela e validated
 //Para fazer validações
@@ -29,10 +30,11 @@ import java.util.List;
 @Validated
 
 public class UsuarioModel implements Serializable {
+    private static final long serialVersionUID = 1L; //Controle das conversões feitas pela JVM
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo; //Primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID codigo; //Primary key
 
     @Column(name = "nome_usuario", length = 55, nullable = false)
     @NotBlank(message = "Erro: o campo 'nome' não foi informado")
@@ -55,7 +57,6 @@ public class UsuarioModel implements Serializable {
     @ManyToOne // Relacionamento muitos para um
     @JoinColumn(name = "endereco_id", referencedColumnName = "codigo") // Junção de tabelas
     private EnderecoModel enderecoModel; // foreign key
-
 
     @JsonIgnore // Mapeamento um para muitos
     @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL)

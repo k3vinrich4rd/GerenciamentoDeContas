@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 //Métodos assessores, modificadores, construtor e construtor vazio
 
 @Getter
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 // para visualizar um usuário
 public class UsuarioModelDto {
 
-    private Long codigo;
+    private UUID codigo;
     private String nomeUsuario;
     private LocalDate dataDeNascimento;
     private String email;

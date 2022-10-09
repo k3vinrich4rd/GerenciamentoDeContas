@@ -1,6 +1,8 @@
 package com.example.gerenciamentoDeContas.service;
 // Caso estiver assim, não precisará repetir a escrita do Enum
 
+import com.example.gerenciamentoDeContas.enumeric.Status;
+import com.example.gerenciamentoDeContas.enumeric.Tipo;
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
 import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.gerenciamentoDeContas.enumeric.Status.AGUARDANDO;
 import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
@@ -21,7 +24,7 @@ import static com.example.gerenciamentoDeContas.enumeric.Status.VENCIDA;
 public class ContasAPagarService {
 
     @Autowired
-    private IContasAPagarRepository contasAPagarRepository;
+    private IContasAPagarRepository iContasAPagarRepository;
 
     public ContasAPagarModel cadastrarContas(ContasAPagarModel contasAPagarModel) {
         Boolean pagamentoEmDia = LocalDate.now().isBefore(contasAPagarModel.getDataDeVencimento()) || LocalDate.now().equals(contasAPagarModel.getDataDeVencimento());
@@ -30,7 +33,7 @@ public class ContasAPagarService {
         } else {
             contasAPagarModel.setStatus(AGUARDANDO); //Se não vai retornar "Aguardando"
         }
-        return contasAPagarRepository.save(contasAPagarModel);
+        return iContasAPagarRepository.save(contasAPagarModel);
     }
 
 
@@ -38,7 +41,7 @@ public class ContasAPagarService {
     public List<ContasAPagarResponse> exibirTodosRegistrosDePagamento() {
 
         List<ContasAPagarResponse> contasAPagarResposta = new ArrayList<>();
-        List<ContasAPagarModel> contasAPagarModelList = contasAPagarRepository.findAll();
+        List<ContasAPagarModel> contasAPagarModelList = iContasAPagarRepository.findAll();
         for (ContasAPagarModel valoresDeResposta : contasAPagarModelList) {
             ContasAPagarResponse contasAPagar = new ContasAPagarResponse();
             contasAPagar.setCodigo(valoresDeResposta.getCodigo());
@@ -51,22 +54,34 @@ public class ContasAPagarService {
     }
 
 
-    public Optional<ContasAPagarModel> exibirContasViaId(Long codigo) {
-        return contasAPagarRepository.findById(codigo);
+    public Optional<ContasAPagarModel> exibirContasViaId(UUID codigo) {
+        return iContasAPagarRepository.findById(codigo);
     }
 
     //Método para mudar apenas o status de pagamento e quando ocorrer essa mudança colocar a hora atual com data
-    public ContasAPagarModel alterarRegistrosDePagamento(AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, Long codigo) {
-        ContasAPagarModel contasAPagar = contasAPagarRepository.findById(codigo).get(); // Transforma em um objeto comum
+    public ContasAPagarModel alterarRegistrosDePagamento(AlterarStatusPagamentoRequest alterarStatusPagamentoRequest, UUID codigo) {
+        ContasAPagarModel contasAPagar = iContasAPagarRepository.findById(codigo).get(); // Transforma em um objeto comum
         contasAPagar.setStatus(alterarStatusPagamentoRequest.getStatus());
         contasAPagar.setDataDePagamento(LocalDateTime.now());
 
-        return contasAPagarRepository.save(contasAPagar);
+        return iContasAPagarRepository.save(contasAPagar);
 
     }
 
-    public void deletarConta(Long codigo) {
-        contasAPagarRepository.deleteById(codigo);
+    public void deletarConta(UUID codigo) {
+        iContasAPagarRepository.deleteById(codigo);
+    }
+
+    public boolean existsById(UUID id){
+        return iContasAPagarRepository.existsById(id);
+    }
+
+    public List<ContasAPagarModel> findByStatus(Status status) {
+        return iContasAPagarRepository.findByStatus(status);
+    }
+
+    public List<ContasAPagarModel> findByTipo(Tipo tipo) {
+        return iContasAPagarRepository.findByTipo(tipo);
     }
 }
 

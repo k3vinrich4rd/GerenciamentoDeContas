@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,7 +39,7 @@ public class EnderecoServiceTest {
     @DisplayName("Testando o metodo de cadastrar")
     void testeCadastrarEnderecoService() {
         iEnderecoRepository.save(enderecoModel);
-        Mockito.when(iEnderecoRepository.existsById(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(iEnderecoRepository.existsById(Mockito.any())).thenReturn(true);
         Mockito.verify(iEnderecoRepository, Mockito.times(1)).save(enderecoModel);
     }
 
@@ -52,14 +53,14 @@ public class EnderecoServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
     void testeBuscarEnderecoViaId() {
-        Optional<EnderecoModel> enderecoModelOptional = enderecoService.exibirEnderecosViaId(1L);
+        Optional<EnderecoModel> enderecoModelOptional = enderecoService.exibirEnderecosViaId(UUID.randomUUID());
         assertTrue(true, String.valueOf(enderecoModelOptional));
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de atualizar estiver funcionando corretamente")
     void testeAtualizarEnderecoService() {
-        EnderecoModel enderecoModel1 = enderecoService.alterarEnderecosCadastrados(enderecoModel, 1L);
+        EnderecoModel enderecoModel1 = enderecoService.alterarEnderecosCadastrados(enderecoModel, UUID.randomUUID());
         iEnderecoRepository.save(enderecoModel);
         assertTrue(true, (Supplier<String>) enderecoModel1);
     }
@@ -67,7 +68,7 @@ public class EnderecoServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, se o metodo deletar via id estiver funcionando corretamente")
     void testeDeletarEnderecoViaId() {
-        EnderecoService enderecoService1 = enderecoService.deletarEnderecosCadastrados(1L);
+        EnderecoService enderecoService1 = enderecoService.deletarEnderecosCadastrados(UUID.randomUUID());
         assertTrue(true, (Supplier<String>) enderecoService1);
     }
 

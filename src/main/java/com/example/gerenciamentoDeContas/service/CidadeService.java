@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CidadeService {
@@ -24,16 +25,20 @@ public class CidadeService {
         return iCidadeRepository.findAll();
     }
 
-    public Optional<CidadeModel> exibirCidadeViaId(Long codigo) {
+    public Optional<CidadeModel> exibirCidadeViaId(UUID codigo) {
         return Optional.ofNullable(iCidadeRepository.findById(codigo).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar busca " + codigo))));
     }
 
-    public CidadeModel alterarCidadeCadastrada(CidadeModel cidadeModel, Long codigo) {
+    public CidadeModel alterarCidadeCadastrada(CidadeModel cidadeModel, UUID codigo) {
         iCidadeRepository.findById(codigo).orElseThrow(() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar uma alteração " + codigo));
         return iCidadeRepository.save(cidadeModel);
     }
 
-    public void deletarCidadesCadastradas(Long codigo) {
+    public void deletarCidadesCadastradas(UUID codigo) {
         iCidadeRepository.deleteById(codigo);
+    }
+
+    public boolean existsById(UUID codigo) {
+        return iCidadeRepository.existsById(codigo);
     }
 }

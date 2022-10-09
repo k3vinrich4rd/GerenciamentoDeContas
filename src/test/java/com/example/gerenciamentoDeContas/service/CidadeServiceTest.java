@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 public class CidadeServiceTest {
@@ -35,7 +36,7 @@ public class CidadeServiceTest {
     @DisplayName("Testando o metodo de cadastrar")
     void testeSeCadastroDeCidadeEstaFuncionando() {
         iCidadeRepository.save(cidadeModel);
-        Mockito.when(iCidadeRepository.existsById(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(iCidadeRepository.existsById(Mockito.any())).thenReturn(true);
         Mockito.verify(iCidadeRepository, Mockito.times(1)).save(cidadeModel);
     }
 
@@ -50,21 +51,21 @@ public class CidadeServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
     void testeDeBuscarCidadesViaId() {
-        cidadeService.exibirCidadeViaId(1L);
+        cidadeService.exibirCidadeViaId(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de atualizar estiver funcionando corretamente")
     void testeDeAtualizarCidade() {
-        cidadeService.alterarCidadeCadastrada(cidadeModel, 1L);
+        cidadeService.alterarCidadeCadastrada(cidadeModel, UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo deletar via id estiver funcionando corretamente")
     void testeDeDeletarCidadesViaId() {
-        cidadeService.deletarCidadesCadastradas(1L);
+        cidadeService.deletarCidadesCadastradas(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 

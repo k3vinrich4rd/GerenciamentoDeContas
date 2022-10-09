@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 //Response criada para exibir somente alguns atributos em específico
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContasAPagarResponse {
-    private Long codigo;
+    private UUID codigo;
     private String nome;
     private Double valor;
     private Status status;

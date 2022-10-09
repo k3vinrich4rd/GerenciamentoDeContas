@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 public class UsuarioServiceTest {
@@ -35,7 +36,7 @@ public class UsuarioServiceTest {
     @DisplayName("Testando metodo de cadastrar")
     void testeUsuarioServiceEstaFuncionando() {
         iUsuarioRepository.save(usuarioModel);
-        Mockito.when(iUsuarioRepository.existsById(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(iUsuarioRepository.existsById(Mockito.any())).thenReturn(true);
         Mockito.verify(iUsuarioRepository, Mockito.times(1)).save(usuarioModel);
     }
 
@@ -49,21 +50,21 @@ public class UsuarioServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
     void testeExibirUsuarioViaId() {
-        iUsuarioRepository.findById(1L);
+        iUsuarioRepository.findById(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de atualizar estiver funcionando corretamente")
     void testeAtualizarUsuario() {
-        usuarioService.alterarUsuarioCadastrado(usuarioModel, 1L);
+        usuarioService.alterarUsuarioCadastrado(usuarioModel, UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo deletar via id estiver funcionando corretamente")
     void testeDeletarUsuario() {
-        usuarioService.deletarUsuario(1L);
+        usuarioService.deletarUsuario(UUID.randomUUID());
         Assertions.assertTrue(true);
     }
 
