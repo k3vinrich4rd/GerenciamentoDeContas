@@ -1,7 +1,6 @@
 package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.model.CidadeModel;
-import com.example.gerenciamentoDeContas.repository.ICidadeRepository;
 import com.example.gerenciamentoDeContas.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

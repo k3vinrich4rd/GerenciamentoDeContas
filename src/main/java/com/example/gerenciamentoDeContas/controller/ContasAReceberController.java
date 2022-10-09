@@ -2,7 +2,6 @@ package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.enumeric.TipoRecebimento;
 import com.example.gerenciamentoDeContas.model.ContasReceberModel;
-import com.example.gerenciamentoDeContas.repository.IContasAReceberRepository;
 import com.example.gerenciamentoDeContas.service.ContasAReceberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

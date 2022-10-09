@@ -1,7 +1,6 @@
 package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.model.EnderecoModel;
-import com.example.gerenciamentoDeContas.repository.IEnderecoRepository;
 import com.example.gerenciamentoDeContas.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

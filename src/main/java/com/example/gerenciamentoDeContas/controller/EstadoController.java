@@ -1,7 +1,6 @@
 package com.example.gerenciamentoDeContas.controller;
 
 import com.example.gerenciamentoDeContas.model.EstadoModel;
-import com.example.gerenciamentoDeContas.repository.IEstadoRepository;
 import com.example.gerenciamentoDeContas.service.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

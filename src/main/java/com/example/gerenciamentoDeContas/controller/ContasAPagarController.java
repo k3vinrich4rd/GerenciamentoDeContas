@@ -5,7 +5,6 @@ import com.example.gerenciamentoDeContas.enumeric.Tipo;
 import com.example.gerenciamentoDeContas.model.ContasAPagarModel;
 import com.example.gerenciamentoDeContas.model.request.AlterarStatusPagamentoRequest;
 import com.example.gerenciamentoDeContas.model.response.ContasAPagarResponse;
-import com.example.gerenciamentoDeContas.repository.IContasAPagarRepository;
 import com.example.gerenciamentoDeContas.service.ContasAPagarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
