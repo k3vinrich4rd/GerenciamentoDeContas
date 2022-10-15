@@ -13,20 +13,16 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 //Classe Dto (criada para aparecer somente os métodos abaixo, quando fazer a requisição de busca
 // para visualizar um usuário
-public class UsuarioModelDto {
+public class UsuarioResponse {
 
     private UUID codigo;
     private String nomeUsuario;
     private LocalDate dataDeNascimento;
     private String email;
 
-    public UsuarioModelDto(UsuarioModel obj) {
-        this.codigo = obj.getCodigo();
-        this.nomeUsuario = obj.getNomeUsuario();
-        this.dataDeNascimento = obj.getDataDeNascimento();
-        this.email = obj.getEmail();
+    public UsuarioResponse(String nomeUsuario, LocalDate dataDeNascimento, String email, LocalDate dataDeNascimento1) {
     }
 }

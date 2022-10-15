@@ -66,8 +66,12 @@ public class ContasAReceberService {
     }
 
     public void deletarContasCadastradas(UUID codigo) {
+        if (!iContasAReceberRepository.existsById(codigo)) {
+            throw new RuntimeException("Erro, id não encontrado");
+        }
         iContasAReceberRepository.deleteById(codigo);
     }
+
 
     public boolean existsById(UUID codigo) {
         return iContasAReceberRepository.existsById(codigo);

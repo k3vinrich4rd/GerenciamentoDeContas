@@ -1,6 +1,7 @@
 package com.example.gerenciamentoDeContas.controller;
 
-import com.example.gerenciamentoDeContas.model.Dto.UsuarioModelDto;
+import com.example.gerenciamentoDeContas.model.Dto.UsuarioRequest;
+import com.example.gerenciamentoDeContas.model.Dto.UsuarioResponse;
 import com.example.gerenciamentoDeContas.model.UsuarioModel;
 import com.example.gerenciamentoDeContas.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 //Controller com o mapeamento e validated para validações existentes
 @RestController
@@ -25,16 +25,13 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<UsuarioModel> cadastrarUsuario(@Valid @RequestBody UsuarioModel usuarioModel) {
-        UsuarioModel usuario = usuarioService.cadastrarNovoUsuario(usuarioModel);
-        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrarNovoUsuario(usuarioRequest));
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioModelDto>> exibirUsuariosCadastrados() {
-        List<UsuarioModel> list = usuarioService.exibirUsuarioCadastrado();
-        List<UsuarioModelDto> listUsuarioModel = list.stream().map(obj -> new UsuarioModelDto(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listUsuarioModel);
+    public ResponseEntity<List<UsuarioResponse>> exibirUsuariosCadastrados() {
+        return ResponseEntity.ok().body(usuarioService.exibirUsuarioCadastrado());
     }
 
     @GetMapping(path = "/{codigo}")
@@ -51,14 +48,9 @@ public class UsuarioController {
     }
 
     @DeleteMapping(path = "/{codigo}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable UUID codigo) {
-        if (!usuarioService.existsById(codigo)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
-
-        }
+    @ResponseStatus(HttpStatus.NOT_FOUND) // Retorna o 204
+    public void deletar(@PathVariable UUID codigo) {
         usuarioService.deletarUsuario(codigo);
-        return null;
     }
 
 

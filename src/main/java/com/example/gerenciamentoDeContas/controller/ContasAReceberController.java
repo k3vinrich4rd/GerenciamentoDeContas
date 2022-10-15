@@ -41,17 +41,17 @@ public class ContasAReceberController {
     }
 
     @GetMapping(path = "/dataDeVencimento/{dataDeVencimento}")
-    public ResponseEntity<List<ContasReceberModel>> exibirViaDataDeVencimento(@PathVariable String dataDeVencimento){
+    public ResponseEntity<List<ContasReceberModel>> exibirViaDataDeVencimento(@PathVariable String dataDeVencimento) {
         return ResponseEntity.ok(contasAReceberService.exibirViaDataDeVencimento(dataDeVencimento));
     }
 
     @GetMapping(path = "/statusContasAReceber/{status}")
-    public ResponseEntity<List<ContasReceberModel>> exibirViaStatusContasReceber(@PathVariable String status){
+    public ResponseEntity<List<ContasReceberModel>> exibirViaStatusContasReceber(@PathVariable String status) {
         return ResponseEntity.ok(contasAReceberService.exibirStatusContasAReceber(status));
     }
 
     @GetMapping(path = "/tipoRecebimentoContasAReceber/{tipoRecebimento}")
-    public ResponseEntity<List<ContasReceberModel>> exibirViaTipoRecebimento(@PathVariable TipoRecebimento tipoRecebimento){
+    public ResponseEntity<List<ContasReceberModel>> exibirViaTipoRecebimento(@PathVariable TipoRecebimento tipoRecebimento) {
         return ResponseEntity.ok(contasAReceberService.exibirViaTipoRecebimento(tipoRecebimento));
     }
 
@@ -65,14 +65,9 @@ public class ContasAReceberController {
     }
 
     @DeleteMapping(path = "/{codigo}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable UUID codigo) {
-        if (!contasAReceberService.existsById(codigo)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
-
-        }
+    @ResponseStatus(HttpStatus.NOT_FOUND) // Retorna o 204
+    public void deletar(@PathVariable UUID codigo) {
         contasAReceberService.deletarContasCadastradas(codigo);
-        return null;
     }
 
 

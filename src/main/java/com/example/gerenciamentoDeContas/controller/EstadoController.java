@@ -47,13 +47,8 @@ public class EstadoController {
     }
 
     @DeleteMapping(path = "/{codigo}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable UUID codigo) {
-        if (!estadoService.existsById(codigo)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
-
-        }
+    @ResponseStatus(HttpStatus.NOT_FOUND) // Retorna o 204
+    public void deletar(@PathVariable UUID codigo) {
         estadoService.deletarEstados(codigo);
-        return null;
     }
 }

@@ -69,10 +69,14 @@ public class ContasAPagarService {
     }
 
     public void deletarConta(UUID codigo) {
+        if (!iContasAPagarRepository.existsById(codigo)) {
+            throw new RuntimeException("Erro, id não encontrado");
+        }
         iContasAPagarRepository.deleteById(codigo);
     }
 
-    public boolean existsById(UUID id){
+
+    public boolean existsById(UUID id) {
         return iContasAPagarRepository.existsById(id);
     }
 

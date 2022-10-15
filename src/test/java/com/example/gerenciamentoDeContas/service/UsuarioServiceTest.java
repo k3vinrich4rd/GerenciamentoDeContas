@@ -43,7 +43,7 @@ public class UsuarioServiceTest {
     @Test
     @DisplayName("O teste deve retornar true, pois nenhuma usuario foi cadastrado")
     void testeExibicaoUsuario() {
-        List<UsuarioModel> usuarioModelList = usuarioService.exibirUsuarioCadastrado();
+        List<UsuarioModel> usuarioModelList = iUsuarioRepository.findAll();
         Assertions.assertTrue(usuarioModelList.isEmpty());
     }
 

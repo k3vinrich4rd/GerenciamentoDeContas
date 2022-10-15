@@ -36,8 +36,12 @@ public class EstadoService {
     }
 
     public void deletarEstados(UUID codigo) {
+        if (!iEstadoRepository.existsById(codigo)) {
+            throw new RuntimeException("Erro, id não encontrado");
+        }
         iEstadoRepository.deleteById(codigo);
     }
+
 
     public boolean existsById(UUID codigo) {
         return iEstadoRepository.existsById(codigo);

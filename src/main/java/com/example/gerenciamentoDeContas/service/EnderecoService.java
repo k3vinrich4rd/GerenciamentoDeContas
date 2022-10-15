@@ -34,9 +34,11 @@ public class EnderecoService {
         return iEnderecoRepository.save(enderecoModel);
     }
 
-    public EnderecoService deletarEnderecosCadastrados(UUID codigo) {
+    public void deletarEnderecos(UUID codigo) {
+        if (!iEnderecoRepository.existsById(codigo)) {
+            throw new RuntimeException("Erro, id não encontrado");
+        }
         iEnderecoRepository.deleteById(codigo);
-        return null;
     }
 
     public boolean existsById(UUID codigo) {

@@ -48,12 +48,8 @@ public class EnderecoController {
 
 
     @DeleteMapping(path = "/{codigo}")
-    @ResponseStatus(HttpStatus.NO_CONTENT) // Retorna o 204
-    public ResponseEntity deletar(@PathVariable UUID codigo) {
-        if (!enderecoService.existsById(codigo)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Id não encontrado");
-        }
-        enderecoService.deletarEnderecosCadastrados(codigo);
-        return null;
+    @ResponseStatus(HttpStatus.NOT_FOUND) // Retorna o 204
+    public void deletar(@PathVariable UUID codigo) {
+        enderecoService.deletarEnderecos(codigo);
     }
 }

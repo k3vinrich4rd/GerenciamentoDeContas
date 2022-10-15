@@ -35,8 +35,12 @@ public class CidadeService {
     }
 
     public void deletarCidadesCadastradas(UUID codigo) {
+        if (!iCidadeRepository.existsById(codigo)) {
+            throw new RuntimeException("Erro, id não encontrado");
+        }
         iCidadeRepository.deleteById(codigo);
     }
+
 
     public boolean existsById(UUID codigo) {
         return iCidadeRepository.existsById(codigo);

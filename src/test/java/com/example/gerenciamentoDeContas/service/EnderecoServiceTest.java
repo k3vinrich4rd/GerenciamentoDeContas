@@ -2,6 +2,8 @@ package com.example.gerenciamentoDeContas.service;
 
 import com.example.gerenciamentoDeContas.model.EnderecoModel;
 import com.example.gerenciamentoDeContas.repository.IEnderecoRepository;
+import com.example.gerenciamentoDeContas.repository.IEstadoRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,9 +69,9 @@ public class EnderecoServiceTest {
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo deletar via id estiver funcionando corretamente")
-    void testeDeletarEnderecoViaId() {
-        EnderecoService enderecoService1 = enderecoService.deletarEnderecosCadastrados(UUID.randomUUID());
-        assertTrue(true, (Supplier<String>) enderecoService1);
+    void testeDeletarUsuario() {
+        enderecoService.deletarEnderecos(UUID.randomUUID());
+        Assertions.assertTrue(true);
     }
 
 }
